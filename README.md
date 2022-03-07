@@ -11,10 +11,10 @@ Pour modifier le front-end, utiliser la branch `front`, avec (git checkout `fron
 Pour modifier le back-end, utiliser la branch `back`, avec (git checkout `back`).
 
 Auteurs:
-> + Soaig Mercier
-> + Tom Riche
-> + Yann Le Goff
-> + Goulven Quere
+> + Soaig Mercier (FRONT)
+> + Tom Riche     (BACK)
+> + Yann Le Goff  (FRONT)
+> + Goulven Quere (BACK)
 
 Organisation:
 > + Github
