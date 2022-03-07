@@ -9,6 +9,7 @@ Auteurs:
 Organisation:
 > Github
 > Trello
+> Discord
 
 Environnement technologique:
 > bdd relationnelle
