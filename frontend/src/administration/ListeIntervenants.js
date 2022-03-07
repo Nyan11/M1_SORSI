@@ -25,13 +25,13 @@ const liste = [
   },
 ]
 
-class ListeGestionnaires extends Component {
+class ListeIntervenants extends Component {
   render() {
     return <div>
-      <h3>Liste des gestionnaires</h3>
+      <h3>Liste des intervenants</h3>
       <UsersTable users={liste} />
     </div>;
   }
 }
 
-export default ListeGestionnaires;
+export default ListeIntervenants;
