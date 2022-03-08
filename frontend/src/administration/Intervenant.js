@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { UsersTable } from './Users'
+import ListUsers from './ListUsers/ListUsers'
 
 const liste = [
   {
@@ -24,14 +24,29 @@ const liste = [
     password: "ccc",
   },
 ]
+function modifier(user) {
+  console.log(user)
+}
+function supprimer(user) {
+  console.log(user)
+}
+function ajouter(user) {
+  console.log(user)
+}
 
-class ListeGestionnaires extends Component {
+class Intervenant extends Component {
   render() {
     return <div>
-      <h3>Liste des gestionnaires</h3>
-      <UsersTable users={liste} />
+      <h3>Liste des intervenants</h3>
+      <ListUsers
+        users={liste}
+        modifier={ modifier }
+        supprimer={ supprimer }
+        ajouter={ ajouter }
+        categorie="intervenant"
+      />
     </div>;
   }
 }
 
-export default ListeGestionnaires;
+export default Intervenant;
