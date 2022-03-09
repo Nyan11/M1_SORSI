@@ -2,6 +2,7 @@ import logo from './logo.svg'
 import { Routes, Route, Outlet, Link } from "react-router-dom"
 import './App.css'
 import Administration from './administration/Administration'
+import Gestionnaire from './gestionnaire/Gestionnaire'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="administration/*" element={<Administration />} />
+          <Route path="gestionnaire/*" element={<Gestionnaire />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
@@ -27,6 +29,9 @@ function Layout() {
           </li>
           <li>
             <Link to="/administration">Administration</Link>
+          </li>
+          <li>
+            <Link to="/gestionnaire">Gestionnaire</Link>
           </li>
           <li>
             <Link to="/nothing-here">Nothing Here</Link>

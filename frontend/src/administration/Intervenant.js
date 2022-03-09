@@ -24,8 +24,9 @@ const liste = [
     password: "ccc",
   },
 ]
-function modifier(user) {
-  console.log(user)
+function modifier(userNew, userOld) {
+  console.log(userNew)
+  console.log(userOld)
 }
 function supprimer(user) {
   console.log(user)

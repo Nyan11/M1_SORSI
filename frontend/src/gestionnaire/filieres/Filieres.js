@@ -1,24 +1,33 @@
 import React, { Component } from 'react'
-import TableUsers from './TableUsers'
-import FormUser from '../FormUser'
+import TableFilieres from './TableFilieres'
+import FormFiliere from './FormFiliere'
 
-export default class ListUsers extends Component {
+const filieres = [
+  { code: "INFO", nom: "Informatique" },
+  { code: "GMP", nom: "Geologie Maths Physique" },
+  { code: "ELEC", nom: "Electronique" },
+]
+
+function ajouter(filiere) {}
+function modifier(filiereNew, filiereOld) {}
+function supprimer(filiere) {}
+
+export default class Filieres extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      categorie: props.categorie,
-      users: props.users,
+      filieres: filieres,
       showAjouter: false,
       showSupprimer: false,
       showModifier: false,
-      actionAjouter: props.ajouter,
-      actionSupprimer: props.supprimer,
-      actionModifier: props.modifier,
+      actionAjouter: ajouter,
+      actionSupprimer: supprimer,
+      actionModifier: modifier,
       selected: {},
     }
   }
-  triggerAjouter(user) {
-    this.state.actionAjouter(user)
+  triggerAjouter(cours) {
+    this.state.actionAjouter(cours)
     this.setState((state) => {
       return {...this.state, showAjouter: false}
     })
@@ -33,15 +42,15 @@ export default class ListUsers extends Component {
       return {...this.state, showAjouter: false}
     })
   }
-  triggerModifier(user) {
-    this.state.actionModifier(user, this.state.selected)
+  triggerModifier(cours) {
+    this.state.actionModifier(cours, this.state.selected)
     this.setState((state) => {
       return {...this.state, showModifier: false}
     })
   }
-  triggerShowModifier(user) {
+  triggerShowModifier(filiere) {
     this.setState((state) => {
-      return {...this.state, showModifier: true, selected: user}
+      return {...this.state, showModifier: true, selected: filiere}
     })
   }
   triggerHideModifier() {
@@ -55,9 +64,9 @@ export default class ListUsers extends Component {
       return {...this.state, showSupprimer: false}
     })
   }
-  triggerShowSupprimer(user) {
+  triggerShowSupprimer(filiere) {
     this.setState((state) => {
-      return {...this.state, showSupprimer: true, selected: user}
+      return {...this.state, showSupprimer: true, selected: filiere}
     })
   }
   triggerHideSupprimer() {
@@ -67,34 +76,34 @@ export default class ListUsers extends Component {
   }
   render() {
     return <div>
+      <h3>Liste des filieres</h3>
       <button onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
-      <TableUsers 
-        users={ this.state.users }
+      <TableFilieres 
+        filieres={ this.state.filieres }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
       />
       {this.state.showAjouter &&
         <div>
-          <span>Ajouter un { this.state.categorie }</span>
-          <FormUser trigger={  this.triggerAjouter.bind(this) }/>
+          <span>Ajouter une filiere</span>
+          <FormFiliere trigger={  this.triggerAjouter.bind(this) }/>
           <button onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
         </div>
       }
       {this.state.showSupprimer &&
         <div>
-          <span>Confirmer la suppression de { this.state.selected.login }</span>
+          <span>Confirmer la suppression de { this.state.selected.code }</span>
           <button onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
           <button onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
         </div>
       }
       {this.state.showModifier &&
         <div>
-          <span>Modification de { this.state.selected.login }</span>
-          <FormUser user={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+          <span>Modification de { this.state.selected.code }</span>
+          <FormFiliere filiere={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
           <button onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
         </div>
       }
     </div>
   }
 }
-

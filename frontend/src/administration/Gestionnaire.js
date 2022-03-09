@@ -24,8 +24,9 @@ const liste = [
     password: "ccc",
   },
 ]
-function modifier(user) {
-  console.log(user)
+function modifier(userNew, userOld) {
+  console.log(userNew)
+  console.log(userOld)
 }
 function supprimer(user) {
   console.log(user)
@@ -34,7 +35,7 @@ function ajouter(user) {
   console.log(user)
 }
 
-class Gestionnaire extends Component {
+export default class Gestionnaire extends Component {
   render() {
     return <div>
       <h3>Liste des gestionnaires</h3>
@@ -49,4 +50,3 @@ class Gestionnaire extends Component {
   }
 }
 
-export default Gestionnaire;

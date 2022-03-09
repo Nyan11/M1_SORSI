@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
-import TableUsers from './TableUsers'
-import FormUser from '../FormUser'
+import TableComposantes from './TableComposantes'
+import FormComposante from './FormComposante'
 
-export default class ListUsers extends Component {
+const composantes = [
+  { nom: "ANGLAIS" },
+  { nom: "ALLEMAND" },
+  { nom: "ESPAGNOLE" },
+]
+
+function ajouter(composante) {}
+function modifier(composanteNew, composanteOld) {}
+function supprimer(composante) {}
+
+export default class Composantes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      categorie: props.categorie,
-      users: props.users,
+      composantes: composantes,
       showAjouter: false,
       showSupprimer: false,
       showModifier: false,
-      actionAjouter: props.ajouter,
-      actionSupprimer: props.supprimer,
-      actionModifier: props.modifier,
+      actionAjouter: ajouter,
+      actionSupprimer: supprimer,
+      actionModifier: modifier,
       selected: {},
     }
   }
@@ -33,15 +42,15 @@ export default class ListUsers extends Component {
       return {...this.state, showAjouter: false}
     })
   }
-  triggerModifier(user) {
-    this.state.actionModifier(user, this.state.selected)
+  triggerModifier(composante) {
+    this.state.actionModifier(composante, this.state.selected)
     this.setState((state) => {
       return {...this.state, showModifier: false}
     })
   }
-  triggerShowModifier(user) {
+  triggerShowModifier(composante) {
     this.setState((state) => {
-      return {...this.state, showModifier: true, selected: user}
+      return {...this.state, showModifier: true, selected: composante}
     })
   }
   triggerHideModifier() {
@@ -55,9 +64,9 @@ export default class ListUsers extends Component {
       return {...this.state, showSupprimer: false}
     })
   }
-  triggerShowSupprimer(user) {
+  triggerShowSupprimer(composante) {
     this.setState((state) => {
-      return {...this.state, showSupprimer: true, selected: user}
+      return {...this.state, showSupprimer: true, selected: composante}
     })
   }
   triggerHideSupprimer() {
@@ -67,34 +76,34 @@ export default class ListUsers extends Component {
   }
   render() {
     return <div>
+      <h3>Liste des composantes</h3>
       <button onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
-      <TableUsers 
-        users={ this.state.users }
+      <TableComposantes 
+        composantes={ this.state.composantes }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
       />
       {this.state.showAjouter &&
         <div>
-          <span>Ajouter un { this.state.categorie }</span>
-          <FormUser trigger={  this.triggerAjouter.bind(this) }/>
+          <span>Ajouter une composante</span>
+          <FormComposante trigger={  this.triggerAjouter.bind(this) }/>
           <button onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
         </div>
       }
       {this.state.showSupprimer &&
         <div>
-          <span>Confirmer la suppression de { this.state.selected.login }</span>
+          <span>Confirmer la suppression de { this.state.selected.nom }</span>
           <button onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
           <button onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
         </div>
       }
       {this.state.showModifier &&
         <div>
-          <span>Modification de { this.state.selected.login }</span>
-          <FormUser user={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+          <span>Modification de { this.state.selected.nom }</span>
+          <FormComposante composante={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
           <button onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
         </div>
       }
     </div>
   }
 }
-
