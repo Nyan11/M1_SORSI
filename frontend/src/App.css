@@ -1,38 +1,135 @@
+:root {
+  --main-color: #04AA6D;
+}
+
 .App {
+  background: #fefefe;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* START BUTTON */
+.button-confirm {
+  background-color: var(--main-color);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 20px;
+  width: 150px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.button-cancel {
+  background-color: #ddd;
+  color: black;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 20px;
+  width: 150px;
+}
+/* END BUTTON */
+/* START DIALOG */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.dialog {
+  background: #fafafa;
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 70%;
+  position: relative;
+}
+/* END DIALOG */
+/* START NAV */
+.navbar {
+  width: 100%;
+}
+.navbar > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.navbar > ul > li {
+  display: inline;
+  float: left;
+}
+.navbar-link-selected {
+  background: var(--main-color);
+  color: white;
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.navbar-link {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.navbar > ul > li > a:hover:not(.nav-selected) {
+  background-color: #555;
   color: white;
 }
+/* END NAV */
 
-.App-link {
-  color: #61dafb;
+/* START TABLE */
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+table > tbody > tr:nth-child(even){background-color: #f4f4f4;}
+table > tbody > tr:nth-child(odd){background-color: #fafafa;}
+table > thead > tr {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-color);
+  color: white;
+}
+/* END TABLE */
+
+/* START FORM */
+form > div {
+  display: flex;
+  justify-content: center;
+}
+input[type=text], input[type=email], input[type=password] {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+label {
+  width: 120px;
+  padding: 12px;
+  display: inline-block;
+}
+input[type=submit] {
+  background-color: var(--main-color);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  width: 150px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* END FORM */

@@ -1,52 +1,37 @@
-import logo from './logo.svg'
 import { Routes, Route, Outlet, Link } from "react-router-dom"
 import './App.css'
 import Administration from './administration/Administration'
 import Gestionnaire from './gestionnaire/Gestionnaire'
-import Login from './login/Login'
+import Login from './other/Login'
+import NavBar from './other/NavBar'
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="administration/*" element={<Administration />} />
-          <Route path="gestionnaire/*" element={<Gestionnaire />} />
-          <Route path="*" element={<NoMatch />} />
+        <Route path="/" element={<NavBar />}>
+          <Route
+            index
+            element={<Home />}
+          />
+          <Route
+            path="login"
+            element={<Login />}
+          />
+          <Route
+            path="administration/*"
+            element={<Administration />}
+          />
+          <Route
+            path="gestionnaire/*"
+            element={<Gestionnaire />}
+          />
+          <Route
+            path="*"
+            element={<NoMatch />}
+          />
         </Route>
       </Routes>
-    </div>
-  );
-}
-
-function Layout() {
-  return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/administration">Administration</Link>
-          </li>
-          <li>
-            <Link to="/gestionnaire">Gestionnaire</Link>
-          </li>
-          <li>
-            <Link to="/nothing-here">Nothing Here</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
-
-      <Outlet />
     </div>
   );
 }

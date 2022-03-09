@@ -28,6 +28,8 @@ export default class Login extends Component {
 
   render() {
     return (
+    <div>
+      <h3>Login</h3>
     <form onSubmit={this.handleSubmitClicked.bind(this)} method="get">
       <div>
         <label for="login">login : </label>
@@ -55,6 +57,7 @@ export default class Login extends Component {
         <input type="submit" value="Se connecter"/>
       </div>
     </form>
+    </div>
   )}
 }
 

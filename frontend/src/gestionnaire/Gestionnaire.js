@@ -4,31 +4,66 @@ import Composante from './composantes/Composantes'
 import Filiere from './filieres/Filieres'
 import Cours from './cours/Cours'
 
-function Layout() {
-  return (
-    <div>
-      <nav>
+class NavBarGestionnaire extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selected: window.location.pathname.split("/gestionnaire")[1],
+    }
+  }
+  changeLinkHome() {
+    this.setState({selected: ""})
+  }
+  changeLinkComposante() {
+    this.setState({selected: "/composante"})
+  }
+  changeLinkFiliere() {
+    this.setState({selected: "/filiere"})
+  }
+  changeLinkCours() {
+    this.setState({selected: "/cours"})
+  }
+  render() {
+    return <div>
+      <nav class="navbar">
         <ul>
           <li>
-            <Link to="/gestionnaire">Home</Link>
+            <Link
+              class={this.state.selected === "" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkHome.bind(this)}
+              to="/gestionnaire"
+            >Home
+            </Link>
           </li>
           <li>
-            <Link to="/gestionnaire/composante">Composante</Link>
+            <Link
+              class={this.state.selected === "/composante" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkComposante.bind(this)}
+              to="/gestionnaire/composante"
+            >Composante
+            </Link>
           </li>
           <li>
-            <Link to="/gestionnaire/filiere">Filiere</Link>
+            <Link
+              class={this.state.selected === "/filiere" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkFiliere.bind(this)}
+              to="/gestionnaire/filiere"
+            >Filiere
+            </Link>
           </li>
           <li>
-            <Link to="/gestionnaire/cours">Cours</Link>
+            <Link
+              class={this.state.selected === "/cours" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkCours.bind(this)}
+              to="/gestionnaire/cours"
+            >Cours
+            </Link>
           </li>
         </ul>
       </nav>
-
-      <hr />
-
       <Outlet />
     </div>
-  );
+  }
 }
 
 function Home() {
@@ -54,7 +89,7 @@ export default class Gestionnaire extends Component {
   render() {
     return <div className="App">
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<NavBarGestionnaire />}>
           <Route index element={<Home />} />
           <Route path="composante" element={<Composante />} />
           <Route path="filiere" element={<Filiere />} />
@@ -65,4 +100,3 @@ export default class Gestionnaire extends Component {
     </div>
   }
 }
-

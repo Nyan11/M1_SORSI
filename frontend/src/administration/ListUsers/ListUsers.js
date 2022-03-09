@@ -67,31 +67,37 @@ export default class ListUsers extends Component {
   }
   render() {
     return <div>
-      <button onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
+      <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
       <TableUsers 
         users={ this.state.users }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
       />
       {this.state.showAjouter &&
-        <div>
-          <span>Ajouter un { this.state.categorie }</span>
-          <FormUser trigger={  this.triggerAjouter.bind(this) }/>
-          <button onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
+        <div class="dialog-overlay">
+          <div class="dialog">
+            <h3>Ajouter un { this.state.categorie }</h3>
+            <FormUser trigger={  this.triggerAjouter.bind(this) }/>
+            <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
+          </div>
         </div>
       }
       {this.state.showSupprimer &&
-        <div>
-          <span>Confirmer la suppression de { this.state.selected.login }</span>
-          <button onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
-          <button onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
+        <div class="dialog-overlay">
+          <div class="dialog">
+            <h3>Confirmer la suppression de { this.state.selected.login }</h3>
+            <button class="button-confirm" onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
+            <button class="button-cancel" onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
+          </div>
         </div>
       }
       {this.state.showModifier &&
-        <div>
-          <span>Modification de { this.state.selected.login }</span>
-          <FormUser user={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
-          <button onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
+        <div class="dialog-overlay">
+          <div class="dialog">
+            <h3>Modification de { this.state.selected.login }</h3>
+            <FormUser user={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+            <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
+          </div>
         </div>
       }
     </div>
