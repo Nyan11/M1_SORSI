@@ -3,6 +3,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom"
 import './App.css'
 import Administration from './administration/Administration'
 import Gestionnaire from './gestionnaire/Gestionnaire'
+import Login from './login/Login'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
           <Route path="administration/*" element={<Administration />} />
           <Route path="gestionnaire/*" element={<Gestionnaire />} />
           <Route path="*" element={<NoMatch />} />
@@ -26,6 +28,9 @@ function Layout() {
         <ul>
           <li>
             <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
           </li>
           <li>
             <Link to="/administration">Administration</Link>
