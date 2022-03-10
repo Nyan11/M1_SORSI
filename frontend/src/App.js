@@ -1,7 +1,8 @@
-import { Routes, Route, Outlet, Link } from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 import './App.css'
 import Administration from './administration/Administration'
 import Gestionnaire from './gestionnaire/Gestionnaire'
+import Intervenant from './intervenant/HomeCreneau'
 import Login from './other/Login'
 import NavBar from './other/NavBar'
 import Auth from './services/auth.service'
@@ -27,6 +28,10 @@ function App() {
           <Route
             path="gestionnaire/*"
             element={<Gestionnaire />}
+          />
+          <Route
+            path="intervenant/*"
+            element={<Intervenant />}
           />
           <Route
             path="*"

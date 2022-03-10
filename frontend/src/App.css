@@ -6,6 +6,46 @@
   background: #fefefe;
   text-align: center;
 }
+/* START CRENEAUX */
+.creneaux {}
+.creneau:hover {
+  background: #f1f1f1;
+}
+.creneau {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 20px 20px;
+  /*border: 3px solid #e9e9e9;*/
+}
+.creneau-afaire {
+  border: 3px solid orange;
+}
+.creneau-fait {
+  border: 3px solid green;
+}
+.creneau-annule {
+  border: 3px solid red;
+}
+.creneau-date {
+  width: 100px;
+}
+.creneau-time-1 {
+  width: 100px;
+}
+.creneau-time-2 {
+  width: 100px;
+}
+.creneau-type {
+  width: 100px;
+}
+.creneau-salle {
+  width: 100px;
+}
+.creneau-intitule {
+  flex-grow: 1;
+}
+/* END CRENEAUX */
 /* START BUTTON */
 .button-confirm {
   background-color: var(--main-color);

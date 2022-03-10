@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Routes, Route, Outlet, Link } from "react-router-dom"
+import { Outlet, Link } from "react-router-dom"
 
 function setColor(color) {
   document.documentElement.style.setProperty('--main-color', color);
@@ -13,6 +13,8 @@ function loadFirstColor(path) {
     setColor("#04aa6d")
   } else if (path === "gestionnaire") {
     setColor("#ff6347")
+  } else if (path === "intervenant") {
+    setColor("#414141")
   } else {
     setColor("#3b48b1")
   }
@@ -42,6 +44,10 @@ export default class NavBar extends Component {
     setColor("#ff6347")
     this.setState({selected: "gestionnaire"})
   }
+  changeLinkInt() {
+    setColor("#414141")
+    this.setState({selected: "intervenant"})
+  }
   render() {
     return <div>
       <nav class="navbar">
@@ -57,6 +63,9 @@ export default class NavBar extends Component {
           </li>
           <li>
             <Link class={this.state.selected === "gestionnaire" ? "navbar-link-selected" : "navbar-link"} onClick={this.changeLinkGest.bind(this)} to="/gestionnaire">Gestionnaire</Link>
+          </li>
+          <li>
+            <Link class={this.state.selected === "intervenant" ? "navbar-link-selected" : "navbar-link"} onClick={this.changeLinkInt.bind(this)} to="/intervenant">Intervenant</Link>
           </li>
         </ul>
       </nav>
