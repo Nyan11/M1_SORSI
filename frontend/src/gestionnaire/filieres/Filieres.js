@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TableFilieres from './TableFilieres'
 import FormFiliere from './FormFiliere'
+import Service from '../../services/gestionnaire.service'
 
 const filieres = [
   { code: "INFO", nom: "Informatique" },
@@ -8,9 +9,18 @@ const filieres = [
   { code: "ELEC", nom: "Electronique" },
 ]
 
-function ajouter(filiere) {}
-function modifier(filiereNew, filiereOld) {}
-function supprimer(filiere) {}
+function ajouter(item) {
+  Service.createFiliere(item)
+}
+function modifier(itemNew, itemOld) {
+  Service.updateFiliere(itemNew)
+}
+function supprimer(item) {
+  Service.deleteFiliere(item)
+}
+function updateView() {
+  Service.getFiliere()
+}
 
 export default class Filieres extends Component {
   constructor(props) {
@@ -28,6 +38,7 @@ export default class Filieres extends Component {
   }
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
+    updateView()
     this.setState((state) => {
       return {...this.state, showAjouter: false}
     })
@@ -44,6 +55,7 @@ export default class Filieres extends Component {
   }
   triggerModifier(cours) {
     this.state.actionModifier(cours, this.state.selected)
+    updateView()
     this.setState((state) => {
       return {...this.state, showModifier: false}
     })
@@ -60,6 +72,7 @@ export default class Filieres extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
+    updateView()
     this.setState((state) => {
       return {...this.state, showSupprimer: false}
     })
@@ -78,7 +91,7 @@ export default class Filieres extends Component {
     return <div>
       <h3>Liste des filieres</h3>
       <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
-      <TableFilieres 
+      <TableFilieres
         filieres={ this.state.filieres }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import Auth from '../services/auth.service'
 
-function connect(credential) {
+async function connect(credential) {
   console.log(credential)
+  var test = Auth.login(credential.login, credential.password)
+  console.log(test)
+  var ccc = await test
+  console.log(ccc)
 }
 
 export default class Login extends Component {
@@ -60,4 +65,3 @@ export default class Login extends Component {
     </div>
   )}
 }
-

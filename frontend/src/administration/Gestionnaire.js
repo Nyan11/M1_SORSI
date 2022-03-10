@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListUsers from './ListUsers/ListUsers'
+import AdministrationService from '../services/administration.service'
 
 const liste = [
   {
@@ -25,14 +26,16 @@ const liste = [
   },
 ]
 function modifier(userNew, userOld) {
-  console.log(userNew)
-  console.log(userOld)
+  AdministrationService.updateGestionnaire(userNew)
 }
 function supprimer(user) {
-  console.log(user)
+  AdministrationService.deleteGestionnaire(user)
 }
 function ajouter(user) {
-  console.log(user)
+  AdministrationService.createGestionnaire(user)
+}
+function updateView() {
+  AdministrationService.getGestionnaires()
 }
 
 export default class Gestionnaire extends Component {
@@ -44,9 +47,9 @@ export default class Gestionnaire extends Component {
         modifier={ modifier }
         supprimer={ supprimer }
         ajouter={ ajouter }
+        update={ updateView }
         categorie="gestionnaire"
       />
     </div>;
   }
 }
-

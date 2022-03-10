@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TableCours from './TableCours'
 import FormCours from './FormCours'
+import Service from '../../services/gestionnaire.service'
 
 const cours = [
   { intitule: "L1" },
@@ -8,9 +9,18 @@ const cours = [
   { intitule: "M2" },
 ]
 
-function ajouter(cours) {}
-function modifier(coursNew, coursOld) {}
-function supprimer(cours) {}
+function ajouter(item) {
+  Service.createCours(item)
+}
+function modifier(itemNew, itemOld) {
+  Service.updateCours(itemNew)
+}
+function supprimer(item) {
+  Service.deleteCours(item)
+}
+function updateView() {
+  Service.getCours()
+}
 
 export default class Cours extends Component {
   constructor(props) {
@@ -28,6 +38,7 @@ export default class Cours extends Component {
   }
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
+    updateView()
     this.setState((state) => {
       return {...this.state, showAjouter: false}
     })
@@ -44,6 +55,7 @@ export default class Cours extends Component {
   }
   triggerModifier(cours) {
     this.state.actionModifier(cours, this.state.selected)
+    updateView()
     this.setState((state) => {
       return {...this.state, showModifier: false}
     })
@@ -60,6 +72,7 @@ export default class Cours extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
+    updateView()
     this.setState((state) => {
       return {...this.state, showSupprimer: false}
     })
@@ -78,7 +91,7 @@ export default class Cours extends Component {
     return <div>
       <h3>Liste des cours</h3>
       <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
-      <TableCours 
+      <TableCours
         cours={ this.state.cours }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
@@ -86,7 +99,7 @@ export default class Cours extends Component {
       {this.state.showAjouter &&
         <div class="dialog-overlay">
           <div class="dialog">
-            <span>Ajouter un cours</span>
+            <h3>Ajouter un cours</h3>
             <FormCours trigger={  this.triggerAjouter.bind(this) }/>
             <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
           </div>
@@ -95,7 +108,7 @@ export default class Cours extends Component {
       {this.state.showSupprimer &&
         <div class="dialog-overlay">
           <div class="dialog">
-            <span>Confirmer la suppression de { this.state.selected.intitule }</span>
+            <h3>Confirmer la suppression de { this.state.selected.intitule }</h3>
             <button class="button-confirm" onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
             <button class="button-cancel" onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
           </div>
@@ -104,7 +117,7 @@ export default class Cours extends Component {
       {this.state.showModifier &&
         <div class="dialog-overlay">
           <div class="dialog">
-            <span>Modification de { this.state.selected.intitule }</span>
+            <h3>Modification de { this.state.selected.intitule }</h3>
             <FormCours cours={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
             <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
           </div>

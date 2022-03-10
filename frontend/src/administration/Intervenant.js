@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListUsers from './ListUsers/ListUsers'
+import AdministrationService from '../services/administration.service'
 
 const liste = [
   {
@@ -25,14 +26,16 @@ const liste = [
   },
 ]
 function modifier(userNew, userOld) {
-  console.log(userNew)
-  console.log(userOld)
+  AdministrationService.updateIntervenant(userNew)
 }
 function supprimer(user) {
-  console.log(user)
+  AdministrationService.deleteIntervenant(user)
 }
 function ajouter(user) {
-  console.log(user)
+  AdministrationService.createIntervenant(user)
+}
+function updateView() {
+  AdministrationService.getIntervenants()
 }
 
 class Intervenant extends Component {

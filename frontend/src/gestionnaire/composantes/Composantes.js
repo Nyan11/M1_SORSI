@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TableComposantes from './TableComposantes'
 import FormComposante from './FormComposante'
+import Service from '../../services/gestionnaire.service'
 
 const composantes = [
   { nom: "ANGLAIS" },
@@ -8,9 +9,18 @@ const composantes = [
   { nom: "ESPAGNOLE" },
 ]
 
-function ajouter(composante) {}
-function modifier(composanteNew, composanteOld) {}
-function supprimer(composante) {}
+function ajouter(item) {
+  Service.createComposante(item)
+}
+function modifier(itemNew, itemOld) {
+  Service.updateComposante(itemNew)
+}
+function supprimer(item) {
+  Service.deleteComposante(item)
+}
+function updateView() {
+  Service.getComposante()
+}
 
 export default class Composantes extends Component {
   constructor(props) {
@@ -28,6 +38,7 @@ export default class Composantes extends Component {
   }
   triggerAjouter(user) {
     this.state.actionAjouter(user)
+    updateView()
     this.setState((state) => {
       return {...this.state, showAjouter: false}
     })
@@ -44,6 +55,7 @@ export default class Composantes extends Component {
   }
   triggerModifier(composante) {
     this.state.actionModifier(composante, this.state.selected)
+    updateView()
     this.setState((state) => {
       return {...this.state, showModifier: false}
     })
@@ -60,6 +72,7 @@ export default class Composantes extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
+    updateView()
     this.setState((state) => {
       return {...this.state, showSupprimer: false}
     })
@@ -78,7 +91,7 @@ export default class Composantes extends Component {
     return <div>
       <h3>Liste des composantes</h3>
       <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
-      <TableComposantes 
+      <TableComposantes
         composantes={ this.state.composantes }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }

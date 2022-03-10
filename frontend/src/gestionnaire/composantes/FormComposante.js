@@ -32,6 +32,7 @@ export default class FormComposante extends Component {
     var item = this.state.composante
     event.preventDefault()
     this.state.trigger(item)
+    console.log('debug')
   }
 
   render() {

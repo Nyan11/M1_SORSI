@@ -4,8 +4,10 @@ import Administration from './administration/Administration'
 import Gestionnaire from './gestionnaire/Gestionnaire'
 import Login from './other/Login'
 import NavBar from './other/NavBar'
+import Auth from './services/auth.service'
 
 function App() {
+  Auth.debugLocal()
   return (
     <div className="App">
       <Routes>
