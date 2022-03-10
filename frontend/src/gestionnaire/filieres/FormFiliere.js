@@ -24,7 +24,7 @@ export default class FormFiliere extends Component {
     const newItem = { ...oldItem, [event.target.id]: event.target.value }
     this.setState({
       ...this.state,
-      composante: newItem
+      filiere: newItem
     });
   }
 
