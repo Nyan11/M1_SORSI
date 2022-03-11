@@ -1,47 +1,48 @@
 import authHeader from './auth-headers';
+const axios = require('axios')
 
-const API_URL_COMPOSANTE = "http://localhost:8080/api/composante/"
-const API_URL_COURS = "http://localhost:8080/api/cours/"
-const API_URL_FILIERE = "http://localhost:8080/api/filiere/"
+const API_URL_COMPOSANTE = "http://localhost:8080/api/composante"
+const API_URL_COURS = "http://localhost:8080/cours"
+const API_URL_FILIERE = "http://localhost:8080/filiereslangue"
 class GestionnaireService {
   /* Composante */
   getComposante() {
-    return fetch(API_URL_COMPOSANTE, {method: "get", headers: authHeader()})
+    return axios.get(API_URL_COMPOSANTE)
   }
   updateComposante(item) {
-    return fetch(API_URL_COMPOSANTE, {method: "put", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.post(API_URL_COMPOSANTE, item)
   }
   createComposante(item) {
-    return fetch(API_URL_COMPOSANTE, {method: "post", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.put(API_URL_COMPOSANTE, item)
   }
   deleteComposante(item) {
-    return fetch(API_URL_COMPOSANTE, {method: "delete", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.delete(API_URL_COMPOSANTE, {data: item})
   }
   /* Cours */
   getCours() {
-    return fetch(API_URL_COURS, {method: "get", headers: authHeader()})
+    return axios.get(API_URL_COURS)
   }
   updateCours(item) {
-    return fetch(API_URL_COURS, {method: "put", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.post(API_URL_COURS, item)
   }
   createCours(item) {
-    return fetch(API_URL_COURS, {method: "post", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.put(API_URL_COURS, item)
   }
   deleteCours(item) {
-    return fetch(API_URL_COURS, {method: "delete", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.delete(API_URL_COURS, {data: item})
   }
   /* Filiere */
-  getFiliere() {
-    return fetch(API_URL_FILIERE, {method: "get", headers: authHeader()})
+  getFilieres() {
+    return axios.get(API_URL_FILIERE)
   }
   updateFiliere(item) {
-    return fetch(API_URL_FILIERE, {method: "put", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.post(API_URL_FILIERE, item)
   }
   createFiliere(item) {
-    return fetch(API_URL_FILIERE, {method: "post", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.put(API_URL_FILIERE, item)
   }
   deleteFiliere(item) {
-    return fetch(API_URL_FILIERE, {method: "delete", headers: authHeader(), body: JSON.stringify(item)})
+    return axios.delete(API_URL_FILIERE, {data: item})
   }
 }
 export default new GestionnaireService();

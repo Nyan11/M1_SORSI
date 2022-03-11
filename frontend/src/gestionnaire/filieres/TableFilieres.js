@@ -59,12 +59,11 @@ class RowTableFiliere extends Component {
   render() {
     return(
       <tr>
-        <td>{ this.state.filiere.code }</td>
-        <td>{ this.state.filiere.nom }</td>
+        <td>{ this.state.filiere.codeFiliereLangue }</td>
+        <td>{ this.state.filiere.nomFiliereLangue }</td>
         <td><button onClick={ this.handleSupprimerClicked.bind(this) }>supprimer</button></td>
         <td><button onClick={ this.handleModifierClicked.bind(this) }>modifier</button></td>
       </tr>
     )
   }
 }
-

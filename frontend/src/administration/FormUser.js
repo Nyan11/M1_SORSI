@@ -29,7 +29,13 @@ export default class FormUser extends Component {
   }
 
   handleSubmitClicked(event) {
-    var user = this.state.user
+    var user = {
+      login: this.state.user.login,
+      nom: this.state.user.nomUsuel,
+      prenom: this.state.user.prenom,
+      mail: this.state.user.mail,
+      mot_de_passe: this.state.user.motDePasse,
+    }
     event.preventDefault()
     this.state.trigger(user)
   }
@@ -52,9 +58,9 @@ export default class FormUser extends Component {
         <label for="nom">nom : </label>
         <input
           type="text"
-          name="nom"
-          id="nom"
-          value={this.state.user.nom || ""}
+          name="nomUsuel"
+          id="nomUsuel"
+          value={this.state.user.nomUsuel || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />
@@ -85,9 +91,9 @@ export default class FormUser extends Component {
         <label for="password">mot de passe : </label>
         <input
           type="password"
-          name="password"
-          id="password"
-          value={this.state.user.password || ""}
+          name="motDePasse"
+          id="motDePasse"
+          value={this.state.user.motDePasse || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />
@@ -98,4 +104,3 @@ export default class FormUser extends Component {
     </form>
   )}
 }
-

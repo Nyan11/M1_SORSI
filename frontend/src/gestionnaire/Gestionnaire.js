@@ -69,7 +69,12 @@ class NavBarGestionnaire extends Component {
 function Home() {
   return (
     <div>
-      <h3>Section Gestionnaire</h3>
+      <h2>Section Gestionnaire</h2>
+      <div class="container">
+        <Composante />
+        <Filiere />
+        <Cours />
+      </div>
     </div>
   );
 }

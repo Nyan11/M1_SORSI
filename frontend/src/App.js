@@ -2,7 +2,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import './App.css'
 import Administration from './administration/Administration'
 import Gestionnaire from './gestionnaire/Gestionnaire'
-import Intervenant from './intervenant/HomeCreneau'
+import Intervenant from './intervenant/Creneaux'
 import Login from './other/Login'
 import NavBar from './other/NavBar'
 import Auth from './services/auth.service'

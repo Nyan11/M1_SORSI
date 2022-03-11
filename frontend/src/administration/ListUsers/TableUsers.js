@@ -17,17 +17,17 @@ export default class UsersTable extends Component {
         <thead>
           <tr>
             <td>login</td>
-            <td>nom</td>
+            <td>nom usuel</td>
             <td>prenom</td>
             <td>mail</td>
-            <td>password</td>
+            <td>mot de passe</td>
             <td>supprimer</td>
             <td>modifier</td>
           </tr>
         </thead>
         <tbody>
           {this.state.users.map((user, index) =>
-            <RowTableUser 
+            <RowTableUser
               key={ index }
               user={ user }
               triggerModifier={ this.state.triggerModifier }
@@ -39,4 +39,3 @@ export default class UsersTable extends Component {
     )
   }
 }
-

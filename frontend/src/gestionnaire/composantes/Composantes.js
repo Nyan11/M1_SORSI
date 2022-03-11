@@ -10,16 +10,16 @@ const composantes = [
 ]
 
 function ajouter(item) {
-  Service.createComposante(item)
+  Service.createComposante(item).then(data => data.data)
 }
 function modifier(itemNew, itemOld) {
-  Service.updateComposante(itemNew)
+  Service.updateComposante(itemNew).then(data => data.data)
 }
 function supprimer(item) {
-  Service.deleteComposante(item)
+  Service.deleteComposante(item).then(data => data.data)
 }
 function updateView() {
-  Service.getComposante()
+  Service.getComposante().then(data => data.data)
 }
 
 export default class Composantes extends Component {
@@ -38,10 +38,7 @@ export default class Composantes extends Component {
   }
   triggerAjouter(user) {
     this.state.actionAjouter(user)
-    updateView()
-    this.setState((state) => {
-      return {...this.state, showAjouter: false}
-    })
+    window.location.reload(false)
   }
   triggerShowAjouter() {
     this.setState((state) => {
@@ -55,10 +52,7 @@ export default class Composantes extends Component {
   }
   triggerModifier(composante) {
     this.state.actionModifier(composante, this.state.selected)
-    updateView()
-    this.setState((state) => {
-      return {...this.state, showModifier: false}
-    })
+    window.location.reload(false)
   }
   triggerShowModifier(composante) {
     this.setState((state) => {
@@ -72,10 +66,7 @@ export default class Composantes extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    updateView()
-    this.setState((state) => {
-      return {...this.state, showSupprimer: false}
-    })
+    window.location.reload(false)
   }
   triggerShowSupprimer(composante) {
     this.setState((state) => {

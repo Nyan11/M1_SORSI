@@ -19,9 +19,7 @@ export default class ListUsers extends Component {
   }
   triggerAjouter(user) {
     this.state.actionAjouter(user)
-    this.setState((state) => {
-      return {...this.state, showAjouter: false}
-    })
+    window.location.reload(false)
   }
   triggerShowAjouter() {
     this.setState((state) => {
@@ -35,9 +33,7 @@ export default class ListUsers extends Component {
   }
   triggerModifier(user) {
     this.state.actionModifier(user, this.state.selected)
-    this.setState((state) => {
-      return {...this.state, showModifier: false}
-    })
+    window.location.reload(false)
   }
   triggerShowModifier(user) {
     this.setState((state) => {
@@ -51,9 +47,7 @@ export default class ListUsers extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    this.setState((state) => {
-      return {...this.state, showSupprimer: false}
-    })
+    window.location.reload(false)
   }
   triggerShowSupprimer(user) {
     this.setState((state) => {
@@ -68,7 +62,7 @@ export default class ListUsers extends Component {
   render() {
     return <div>
       <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
-      <TableUsers 
+      <TableUsers
         users={ this.state.users }
         triggerModifier={ this.triggerShowModifier.bind(this) }
         triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
@@ -103,4 +97,3 @@ export default class ListUsers extends Component {
     </div>
   }
 }
-

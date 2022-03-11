@@ -79,6 +79,10 @@ function Home() {
   return (
     <div>
       <h3>Section Administration</h3>
+      <div class="container">
+        <Gestionnaire />
+        <Intervenant />
+      </div>
     </div>
   );
 }

@@ -2,54 +2,58 @@ import React, { Component } from 'react';
 import ListUsers from './ListUsers/ListUsers'
 import AdministrationService from '../services/administration.service'
 
-const liste = [
-  {
-    login: "e2001",
-    nom: "AMIENS",
-    prenom: "Alice",
-    mail: "alice707@hotmail.com",
-    password: "aaa",
-  },
-  {
-    login: "e2002",
-    nom: "BREST",
-    prenom: "Bernard",
-    mail: "bernard2brest@gmail.com",
-    password: "bbb",
-  },
-  {
-    login: "e2003",
-    nom: "CAEN",
-    prenom: "chloe",
-    mail: "chloe@orange.fr",
-    password: "ccc",
-  },
-]
-function modifier(userNew, userOld) {
-  AdministrationService.updateGestionnaire(userNew)
+
+async function modifier(userNew, userOld) {
+  return await AdministrationService.updateGestionnaire(userNew).then(data => data.data)
 }
-function supprimer(user) {
-  AdministrationService.deleteGestionnaire(user)
+async function supprimer(user) {
+  return await AdministrationService.deleteGestionnaire({login: user.login}).then(data => data.data)
 }
-function ajouter(user) {
-  AdministrationService.createGestionnaire(user)
+async function ajouter(user) {
+  return await AdministrationService.createGestionnaire(user).then(data => data.data)
 }
-function updateView() {
-  AdministrationService.getGestionnaires()
+async function updateView() {
+  return await AdministrationService.getGestionnaires().then(data => data.data)
 }
 
 export default class Gestionnaire extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      liste: null,
+    }
+  }
+  componentDidMount() {
+    this._asyncRequest = updateView().then(
+      users => {
+        this._asyncRequest = null;
+        this.setState({liste: users});
+      }
+    );
+  }
+  componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel();
+    }
+  }
   render() {
-    return <div>
-      <h3>Liste des gestionnaires</h3>
-      <ListUsers
-        users={liste}
-        modifier={ modifier }
-        supprimer={ supprimer }
-        ajouter={ ajouter }
-        update={ updateView }
-        categorie="gestionnaire"
-      />
-    </div>;
+    if (this.state.liste === null) {
+      return <div>
+        <h3>Liste des gestionnaires</h3>
+        Loading
+      </div>;
+    } else {
+      return <div>
+        <h3>Liste des gestionnaires</h3>
+        <ListUsers
+          users={this.state.liste}
+          modifier={ modifier }
+          supprimer={ supprimer }
+          ajouter={ ajouter }
+          update={ updateView }
+          categorie="gestionnaire"
+        />
+      </div>;
+    }
   }
 }

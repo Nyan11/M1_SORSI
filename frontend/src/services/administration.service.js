@@ -1,33 +1,34 @@
 import authHeader from './auth-headers';
+const axios = require('axios')
 
-const API_URL_GESTIONNAIRE = "http://localhost:8080/api/gestionnaire/";
-const API_URL_INTERVENANT = "http://localhost:8080/api/intervenant/";
+const API_URL_GESTIONNAIRES = "http://localhost:8080/gestionnaires";
+const API_URL_INTERVENANTS = "http://localhost:8080/intervenants";
 class AdministrationService {
   /* Gestionnaire */
   getGestionnaires() {
-    return fetch(API_URL_GESTIONNAIRE, {method: "post", headers: authHeader()})
+    return axios.get(API_URL_GESTIONNAIRES)
   }
   updateGestionnaire(user) {
-    return fetch(API_URL_GESTIONNAIRE, {method: "put", headers: authHeader(), body: JSON.stringify(user)})
+    return axios.post(API_URL_GESTIONNAIRES, user)
   }
   createGestionnaire(user) {
-    return fetch(API_URL_GESTIONNAIRE, {method: "post", headers: authHeader(), body: JSON.stringify(user)})
+    return axios.put(API_URL_GESTIONNAIRES, user)
   }
   deleteGestionnaire(user) {
-    return fetch(API_URL_GESTIONNAIRE, {method: "delete", headers: authHeader(), body: JSON.stringify(user)})
+    return axios.delete(API_URL_GESTIONNAIRES, {data: user})
   }
   /* Intervenant */
   getIntervenants() {
-    return fetch(API_URL_INTERVENANT, {method: "post", headers: authHeader()})
+    return axios.get(API_URL_INTERVENANTS)
   }
   updateIntervenant(user) {
-    return fetch(API_URL_GESTIONNAIRE, {method: "put", headers: authHeader(), body: JSON.stringify(user)})
+    return axios.post(API_URL_INTERVENANTS, user)
   }
   createIntervenant(user) {
-    return fetch(API_URL_GESTIONNAIRE, {method: "post", headers: authHeader(), body: JSON.stringify(user)})
+    return axios.put(API_URL_INTERVENANTS, user)
   }
   deleteIntervenant(user) {
-    return fetch(API_URL_GESTIONNAIRE, {method: "delete", headers: authHeader(), body: JSON.stringify(user)})
+    return axios.delete(API_URL_INTERVENANTS, {data: user})
   }
 }
 export default new AdministrationService();

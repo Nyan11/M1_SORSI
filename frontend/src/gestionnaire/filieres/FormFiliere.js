@@ -38,23 +38,23 @@ export default class FormFiliere extends Component {
     return (
     <form onSubmit={this.handleSubmitClicked.bind(this)}>
       <div>
-        <label for="code">code : </label>
+        <label for="codeFiliereLangue">code : </label>
         <input
           type="text"
-          name="code"
-          id="code"
-          value={this.state.filiere.code || ""}
+          name="codeFiliereLangue"
+          id="codeFiliereLangue"
+          value={this.state.filiere.codeFiliereLangue || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />
       </div>
       <div>
-        <label for="nom">nom : </label>
+        <label for="nomFiliereLangue">nom : </label>
         <input
           type="text"
-          name="nom"
-          id="nom"
-          value={this.state.filiere.nom || ""}
+          name="nomFiliereLangue"
+          id="nomFiliereLangue"
+          value={this.state.filiere.nomFiliereLangue || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />
