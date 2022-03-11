@@ -10,6 +10,7 @@ const creneaux = [
     type: "CM",
     salle: "Micro 2.6",
     validation: 2,
+    commentaire: "Bonjour, commentaire 1.",
   },
   {
     intitule: "Algorithmique et programmation",
@@ -19,6 +20,7 @@ const creneaux = [
     type: "CM",
     salle: "Micro 2.6",
     validation: 1,
+    commentaire: "Bonjour, commentaire 2.",
   },
   {
     intitule: "Algorithmique et programmation",
@@ -28,6 +30,7 @@ const creneaux = [
     type: "CM",
     salle: "Micro 2.6",
     validation: 0,
+    commentaire: "Bonjour, commentaire 3.",
   }
 ]
 

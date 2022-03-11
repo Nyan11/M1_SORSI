@@ -14,7 +14,7 @@ function loadFirstColor(path) {
   } else if (path === "gestionnaire") {
     setColor("#ff6347")
   } else if (path === "intervenant") {
-    setColor("#414141")
+    setColor("#3b48b1")
   } else {
     setColor("#3b48b1")
   }
@@ -45,7 +45,7 @@ export default class NavBar extends Component {
     this.setState({selected: "gestionnaire"})
   }
   changeLinkInt() {
-    setColor("#414141")
+    setColor("#3b48b1")
     this.setState({selected: "intervenant"})
   }
   render() {

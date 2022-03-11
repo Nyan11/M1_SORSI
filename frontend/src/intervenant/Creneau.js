@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import FormCreneau from './FormCreneau'
 
 export default class Creneau extends Component {
   constructor(props) {
@@ -37,10 +38,11 @@ export default class Creneau extends Component {
         {this.state.show &&
           <div class="dialog-overlay">
             <div
-              class={((this.state.creneau.validation === 0) ? "dialog creneau-afaire" : (this.state.creneau.validation === 1) ? "dialog creneau-fait" : "dialog creneau-annule")}
+              class="dialog"
             >
               <h3>{this.state.creneau.date + " - " + this.state.creneau.intitule}</h3>
               <p>{"de " + this.state.creneau.heureDebut + " à " + this.state.creneau.heureFin}</p>
+              <FormCreneau creneau={ this.state.creneau } />
               <button class="button-cancel" onClick={ this.hideDialog.bind(this) }>Hide</button>
             </div>
           </div>
