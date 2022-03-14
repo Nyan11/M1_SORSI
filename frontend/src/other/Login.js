@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Auth from '../services/auth.service'
 
-async function connect(credential) {
-  console.log(credential)
-  var test = Auth.login(credential.login, credential.password)
-  console.log(test)
-  var ccc = await test
-  console.log(ccc)
+async function connect(credential, category) {
+  var auth = Auth.login(credential.login, credential.password)
+  var isConnected = await auth
+  if (isConnected) {
+    window.location.pathname = "/" + category
+  }
 }
 
 export default class Login extends Component {
@@ -14,6 +14,7 @@ export default class Login extends Component {
     super(props)
     this.state = {
       login: {},
+      category: props.category,
     }
   }
 
@@ -28,7 +29,7 @@ export default class Login extends Component {
 
   handleSubmitClicked(event) {
     event.preventDefault()
-    connect(this.state.login)
+    connect(this.state.login, this.state.category)
   }
 
   render() {

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom"
-import Gestionnaire from './Gestionnaire'
-import Intervenant from './Intervenant'
+import Creneaux from './Creneaux'
 import Login from '../other/Login'
 import Auth from '../services/auth.service'
 
-class NavBarAdministration extends Component {
+class NavBarIntervenant extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selected: window.location.pathname.split("/administration")[1],
+      selected: window.location.pathname.split("/intervenant")[1],
     }
   }
   changeLinkHome() {
@@ -19,10 +18,7 @@ class NavBarAdministration extends Component {
     this.setState({selected: "/login"})
   }
   changeLinkGestionnaire() {
-    this.setState({selected: "/gestionnaire"})
-  }
-  changeLinkIntervenant() {
-    this.setState({selected: "/intervenant"})
+    this.setState({selected: "/creneaux"})
   }
   render() {
     return <div>
@@ -32,7 +28,7 @@ class NavBarAdministration extends Component {
             <Link
               class={this.state.selected === "" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkHome.bind(this)}
-              to="/administration"
+              to="/intervenant"
             >Home
             </Link>
           </li>
@@ -40,24 +36,16 @@ class NavBarAdministration extends Component {
             <Link
               class={this.state.selected === "/login" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkLogin.bind(this)}
-              to="/administration/login"
+              to="/intervenant/login"
             >Login
             </Link>
           </li>
           <li>
             <Link
-              class={this.state.selected === "/gestionnaire" ? "navbar-link-selected" : "navbar-link"}
+              class={this.state.selected === "/creneaux" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkGestionnaire.bind(this)}
-              to="/administration/gestionnaire"
-            >Gestionnaire
-            </Link>
-          </li>
-          <li>
-            <Link
-              class={this.state.selected === "/intervenant" ? "navbar-link-selected" : "navbar-link"}
-              onClick={this.changeLinkIntervenant.bind(this)}
-              to="/administration/intervenant"
-            >Intervenant
+              to="/intervenant/creneaux"
+            >Creneaux
             </Link>
           </li>
         </ul>
@@ -70,10 +58,9 @@ class NavBarAdministration extends Component {
 function Home() {
   return (
     <div>
-      <h3>Section Administration</h3>
+      <h3>Section Intervenant</h3>
       <div class="container">
-        <Gestionnaire />
-        <Intervenant />
+        <Creneaux />
       </div>
     </div>
   );
@@ -90,22 +77,21 @@ function NoMatch() {
   );
 }
 
-export default class Administration extends Component {
+export default class Intervenant extends Component {
   render() {
-    if (Auth.isLogAsAdmin()) {
+    if (Auth.isLogAsIntervenant()) {
       return <div className="App">
         <Routes>
-          <Route path="/" element={<NavBarAdministration />}>
+          <Route path="/" element={<NavBarIntervenant />}>
             <Route index element={<Home />} />
-            <Route path="login" element={<Login category="administration" />} />
-            <Route path="gestionnaire" element={<Gestionnaire />} />
-            <Route path="intervenant" element={<Intervenant />} />
+            <Route path="login" element={<Login category="intervenant" />} />
+            <Route path="creneaux" element={<Creneaux />} />
             <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>
       </div>
     } else {
-      return <Login category="administration" />
+        return <Login category="intervenant" />
     }
   }
 }

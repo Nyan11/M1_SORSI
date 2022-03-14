@@ -2,7 +2,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import './App.css'
 import Administration from './administration/Administration'
 import Gestionnaire from './gestionnaire/Gestionnaire'
-import Intervenant from './intervenant/Creneaux'
+import Intervenant from './intervenant/Intervenant'
 import Login from './other/Login'
 import NavBar from './other/NavBar'
 import Auth from './services/auth.service'
@@ -19,7 +19,7 @@ function App() {
           />
           <Route
             path="login"
-            element={<Login />}
+            element={<Login category="" />}
           />
           <Route
             path="administration/*"
@@ -43,12 +43,36 @@ function App() {
   );
 }
 
+function debugLog(log, category) {
+  localStorage.setItem("isLog", log)
+  localStorage.setItem("category", category)
+  window.location.reload(false)
+}
+
 function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
+  var isLog = localStorage.getItem('isLog')
+  if (isLog) {
+    return (
+      <div>
+        <h2>Home</h2>
+        <p>{localStorage.getItem('category')}</p>
+        <button onClick={()=>{debugLog(true, "administrateur")}}>Log as user admin</button>
+        <button onClick={()=>{debugLog(true, "gestionnaire")}}>Log as user gestionnaire</button>
+        <button onClick={()=>{debugLog(true, "intervenant")}}>Log as user intervenant</button>
+        <button onClick={()=>{debugLog(false, "")}}>Remove user</button>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h2>Home</h2>
+        <button onClick={()=>{debugLog(true, "administrateur")}}>Log as user admin</button>
+        <button onClick={()=>{debugLog(true, "gestionnaire")}}>Log as user gestionnaire</button>
+        <button onClick={()=>{debugLog(true, "intervenant")}}>Log as user intervenant</button>
+        <button onClick={()=>{debugLog(false, "")}}>Remove user</button>
+      </div>
+    );
+  }
 }
 
 function NoMatch() {

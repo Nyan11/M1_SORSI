@@ -3,6 +3,8 @@ import { Routes, Route, Outlet, Link } from "react-router-dom"
 import Composante from './composantes/Composantes'
 import Filiere from './filieres/Filieres'
 import Cours from './cours/Cours'
+import Login from '../other/Login'
+import Auth from '../services/auth.service'
 
 class NavBarGestionnaire extends Component {
   constructor(props) {
@@ -13,6 +15,9 @@ class NavBarGestionnaire extends Component {
   }
   changeLinkHome() {
     this.setState({selected: ""})
+  }
+  changeLinkLogin() {
+    this.setState({selected: "/login"})
   }
   changeLinkComposante() {
     this.setState({selected: "/composante"})
@@ -33,6 +38,14 @@ class NavBarGestionnaire extends Component {
               onClick={this.changeLinkHome.bind(this)}
               to="/gestionnaire"
             >Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              class={this.state.selected === "/login" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkLogin.bind(this)}
+              to="/gestionnaire/login"
+            >Login
             </Link>
           </li>
           <li>
@@ -92,16 +105,21 @@ function NoMatch() {
 
 export default class Gestionnaire extends Component {
   render() {
-    return <div className="App">
-      <Routes>
-        <Route path="/" element={<NavBarGestionnaire />}>
-          <Route index element={<Home />} />
-          <Route path="composante" element={<Composante />} />
-          <Route path="filiere" element={<Filiere />} />
-          <Route path="cours" element={<Cours />} />
-          <Route path="*" element={<NoMatch />} />
-        </Route>
-      </Routes>
-    </div>
+    if (Auth.isLogAsGestionnaire()) {
+      return <div className="App">
+        <Routes>
+          <Route path="/" element={<NavBarGestionnaire />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login category="gestionnaire"/>} />
+            <Route path="composante" element={<Composante />} />
+            <Route path="filiere" element={<Filiere />} />
+            <Route path="cours" element={<Cours />} />
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        </Routes>
+      </div>
+    } else {
+      return <Login category="gestionnaire"/>
+    }
   }
 }
