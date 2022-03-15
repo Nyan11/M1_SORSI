@@ -70,8 +70,12 @@
   overflow: hidden;
   background-color: #f1f1f1;
 }
+
+.navbar > ul > .navbar-link-right {
+  float: right;
+}
+
 .navbar > ul > li {
-  display: inline;
   float: left;
 }
 .navbar-link-selected {
@@ -87,9 +91,17 @@
   padding: 8px 16px;
   text-decoration: none;
 }
+
 .navbar > ul > li > a:hover:not(.nav-selected) {
   background-color: #555;
   color: white;
+  text-decoration: none;
+}
+
+.navbar > ul > li > div:hover:not(.nav-selected) {
+  background-color: #555;
+  color: white;
+  cursor: pointer;
 }
 /* END NAV */
 

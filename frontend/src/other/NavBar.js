@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, Link } from 'react-router-dom'
+import Auth from '../services/auth.service'
+
 
 function setColor(color) {
   document.documentElement.style.setProperty('--main-color', color);
@@ -48,6 +50,10 @@ export default class NavBar extends Component {
     setColor("#3b48b1")
     this.setState({selected: "intervenant"})
   }
+  changeLinkDisconnect() {
+    Auth.logout()
+    window.location.reload(false)
+  }
   render() {
     return <div>
       <nav class="navbar">
@@ -66,6 +72,9 @@ export default class NavBar extends Component {
           </li>
           <li>
             <Link class={this.state.selected === "intervenant" ? "navbar-link-selected" : "navbar-link"} onClick={this.changeLinkInt.bind(this)} to="/intervenant">Intervenant</Link>
+          </li>
+          <li class="navbar-link-right">
+            <div class="navbar-link" onClick={this.changeLinkDisconnect.bind(this)}>Deconnecter</div>
           </li>
         </ul>
       </nav>
