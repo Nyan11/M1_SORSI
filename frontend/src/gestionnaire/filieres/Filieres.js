@@ -3,6 +3,9 @@ import TableFilieres from './TableFilieres'
 import FormFiliere from './FormFiliere'
 import Service from '../../services/gestionnaire.service'
 
+async function getComposantes() {
+  return await Service.getComposante().then(data => data.data)
+}
 
 async function modifier(itemNew, itemOld) {
   return await Service.updateFiliere(itemNew).then(data => data.data)
@@ -28,11 +31,13 @@ export default class Filieres extends Component {
       actionAjouter: ajouter,
       actionSupprimer: supprimer,
       actionModifier: modifier,
+      ready: false,
+      composantes: [],
       selected: {},
     }
   }
   componentDidMount() {
-    this._asyncRequest = updateView().then(
+    this._asyncRequestFilieres = updateView().then(
       liste => {
         this._asyncRequest = null
         this.setState((state) => {
@@ -40,10 +45,21 @@ export default class Filieres extends Component {
         })
       }
     )
+    this._asyncRequestComposantes = getComposantes().then(
+      liste => {
+        this._asyncRequest = null
+        this.setState((state) => {
+          return {...state, composantes: liste, ready: true}
+        })
+      }
+    )
   }
   componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
+    if (this._asyncRequestFilieres) {
+      this._asyncRequestFilieres.cancel();
+    }
+    if (this._asyncRequestComposantes) {
+      this._asyncRequestComposantes.cancel();
     }
   }
   async triggerAjouter(filiere) {
@@ -89,7 +105,7 @@ export default class Filieres extends Component {
     })
   }
   render() {
-      if (this.state.filieres === null) {
+      if (!this.state.ready || !this.state.filieres) {
         return (<div>
           <h3>Liste des filieres</h3>
           Loading
@@ -100,6 +116,7 @@ export default class Filieres extends Component {
         <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
         <TableFilieres
           filieres={ this.state.filieres }
+          composantes={ this.state.composantes }
           triggerModifier={ this.triggerShowModifier.bind(this) }
           triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
         />
@@ -107,7 +124,7 @@ export default class Filieres extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Ajouter une filiere</h3>
-              <FormFiliere trigger={  this.triggerAjouter.bind(this) }/>
+              <FormFiliere composantes={ this.state.composantes } trigger={  this.triggerAjouter.bind(this) }/>
               <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
             </div>
           </div>
@@ -115,7 +132,7 @@ export default class Filieres extends Component {
         {this.state.showSupprimer &&
           <div class="dialog-overlay">
             <div class="dialog">
-              <h3>Confirmer la suppression de { this.state.selected.code }</h3>
+              <h3>Confirmer la suppression de { this.state.selected.codeFiliereLangue }</h3>
               <button class="button-confirm" onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
               <button class="button-cancel" onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
             </div>
@@ -124,8 +141,8 @@ export default class Filieres extends Component {
         {this.state.showModifier &&
           <div class="dialog-overlay">
             <div class="dialog">
-              <h3>Modification de { this.state.selected.code }</h3>
-              <FormFiliere filiere={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+              <h3>Modification de { this.state.selected.codeFiliereLangue }</h3>
+              <FormFiliere composantes={ this.state.composantes } filiere={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
               <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
             </div>
           </div>

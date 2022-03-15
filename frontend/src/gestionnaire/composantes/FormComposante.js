@@ -42,9 +42,9 @@ export default class FormComposante extends Component {
         <label for="nom">nom : </label>
         <input
           type="text"
-          name="nom"
-          id="nom"
-          value={this.state.composante.nom || ""}
+          name="nomComposante"
+          id="nomComposante"
+          value={this.state.composante.nomComposante || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />

@@ -11,7 +11,7 @@ async function supprimer(item) {
   return await Service.deleteComposante(item).then(data => data.data)
 }
 async function ajouter(item) {
-  return await Service.createComposante(item).then(data => data.data)
+  return await Service.createComposante({...item, idGestionnaire: 10}).then(data => data.data)
 }
 async function updateView() {
   return await Service.getComposante().then(data => data.data)

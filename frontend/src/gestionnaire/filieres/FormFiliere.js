@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Service from '../../services/gestionnaire.service'
+
 
 export default class FormFiliere extends Component {
   constructor(props) {
@@ -6,6 +8,7 @@ export default class FormFiliere extends Component {
     this.state = {
       filiere: {},
       submitValue: "Ajouter",
+      composantes: props.composantes,
       trigger: () => {}
     }
     if (props.filiere) {
@@ -18,7 +21,6 @@ export default class FormFiliere extends Component {
       this.state.trigger = props.trigger
     }
   }
-
   handleInputChanged(event) {
     const oldItem = this.state.filiere
     const newItem = { ...oldItem, [event.target.id]: event.target.value }
@@ -27,13 +29,11 @@ export default class FormFiliere extends Component {
       filiere: newItem
     });
   }
-
   handleSubmitClicked(event) {
     var item = this.state.filiere
     event.preventDefault()
     this.state.trigger(item)
   }
-
   render() {
     return (
     <form onSubmit={this.handleSubmitClicked.bind(this)}>
@@ -58,6 +58,17 @@ export default class FormFiliere extends Component {
           onChange={this.handleInputChanged.bind(this)}
           required
         />
+      </div>
+      <div>
+        <label for="idComposante">code : </label>
+        <select id="idComposante" name="idComposante" value={this.state.filiere.idComposante} onChange={this.handleInputChanged.bind(this)}>
+          {this.state.composantes.map((composante, index) =>
+            <option
+              key={ index }
+              value={ composante.idComposante }
+            >{composante.nomComposante}</option>
+          )}
+        </select>
       </div>
       <div>
         <input type="submit" value={ this.state.submitValue }/>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Service from '../../services/gestionnaire.service'
 
 export default class TableFilieres extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class TableFilieres extends Component {
       filieres: props.filieres,
       triggerModifier: props.triggerModifier,
       triggerSupprimer: props.triggerSupprimer,
+      composantes: props.composantes,
     }
   }
   handleModifierClicked(event) {
@@ -22,6 +24,7 @@ export default class TableFilieres extends Component {
           <tr>
             <td>code</td>
             <td>nom</td>
+            <td>composante</td>
             <td>supprimer</td>
             <td>modifier</td>
           </tr>
@@ -31,6 +34,7 @@ export default class TableFilieres extends Component {
             <RowTableFiliere
               key={ index }
               filiere={ item }
+              composantes={ this.state.composantes }
               triggerModifier={ this.state.triggerModifier }
               triggerSupprimer={ this.state.triggerSupprimer }
             />
@@ -46,6 +50,7 @@ class RowTableFiliere extends Component {
     super(props)
     this.state = {
       filiere: props.filiere,
+      composante: props.composantes.find(comp => {return props.filiere.idComposante === comp.idComposante}),
       triggerModifier: props.triggerModifier,
       triggerSupprimer: props.triggerSupprimer,
     }
@@ -61,6 +66,7 @@ class RowTableFiliere extends Component {
       <tr>
         <td>{ this.state.filiere.codeFiliereLangue }</td>
         <td>{ this.state.filiere.nomFiliereLangue }</td>
+        <td>{ this.state.composante ? this.state.composante.nomComposante : '-' }</td>
         <td><button onClick={ this.handleSupprimerClicked.bind(this) }>supprimer</button></td>
         <td><button onClick={ this.handleModifierClicked.bind(this) }>modifier</button></td>
       </tr>
