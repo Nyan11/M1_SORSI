@@ -2,7 +2,7 @@ import headers from './headers.service'
 
 const axios = require('axios')
 
-const API_URL_COMPOSANTE = "http://localhost:8080/api/composantes"
+const API_URL_COMPOSANTE = "http://localhost:8080/composantes"
 const API_URL_COURS = "http://localhost:8080/cours"
 const API_URL_FILIERE = "http://localhost:8080/filiereslangue"
 class GestionnaireService {

@@ -3,11 +3,6 @@ import TableFilieres from './TableFilieres'
 import FormFiliere from './FormFiliere'
 import Service from '../../services/gestionnaire.service'
 
-const filieres = [
-  { code: "INFO", nom: "Informatique" },
-  { code: "GMP", nom: "Geologie Maths Physique" },
-  { code: "ELEC", nom: "Electronique" },
-]
 
 async function modifier(itemNew, itemOld) {
   return await Service.updateFiliere(itemNew).then(data => data.data)

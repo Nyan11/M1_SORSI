@@ -3,12 +3,6 @@ import TableCours from './TableCours'
 import FormCours from './FormCours'
 import Service from '../../services/gestionnaire.service'
 
-const cours = [
-  { intitule: "L1" },
-  { intitule: "M1" },
-  { intitule: "M2" },
-]
-
 
 async function modifier(itemNew, itemOld) {
   return await Service.updateCours(itemNew).then(data => data.data)

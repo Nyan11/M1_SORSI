@@ -62,11 +62,10 @@ class RowTableComposante extends Component {
   render() {
     return(
       <tr>
-        <td>{ this.state.composante.nom }</td>
+        <td>{ this.state.composante.nomComposante }</td>
         <td><button onClick={ this.handleSupprimerClicked.bind(this) }>supprimer</button></td>
         <td><button onClick={ this.handleModifierClicked.bind(this) }>modifier</button></td>
       </tr>
     )
   }
 }
-
