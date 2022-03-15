@@ -14,7 +14,7 @@ router.get('/composantes', (req, res) => {
         }
         else {
             res.status(200).json(data);
-            console.log("FUNCTION CALL : [GET] - Affichage de tous les cours");
+            console.log("FUNCTION CALL : [GET] - Affichage de tous les composantes");
         }
     });
 });
