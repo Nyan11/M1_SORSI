@@ -1,0 +1,26 @@
+{
+  "name": "projetsor-si_rest-api",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mariadb": "^2.5.6",
+    "mysql": "^2.18.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/12evangelion12/ProjetSOR-SI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/12evangelion12/ProjetSOR-SI/issues"
+  },
+  "homepage": "https://github.com/12evangelion12/ProjetSOR-SI#readme",
+  "description": ""
+}
