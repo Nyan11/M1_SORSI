@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TableCreneaux from './TableCreneaux'
 import FormCreneau from './FormCreneau'
-import Service from '../services/gestionnaire.service'
+import Service from '../../services/gestionnaire.service'
 
 
 const creneaux = [
@@ -38,16 +38,16 @@ const creneaux = [
 ]
 
 async function modifier(itemNew, itemOld) {
-  return await Service.updateCours(itemNew).then(data => data.data)
+  return Service.updateCours(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return await Service.deleteCours(item).then(data => data.data)
+  return Service.deleteCours(item).then(data => data.data)
 }
 async function ajouter(item) {
-  return await Service.createCours(item).then(data => data.data)
+  return Service.createCours(item).then(data => data.data)
 }
 async function updateView() {
-  return await Service.createCours(null).then(data => data.data)
+  return Service.createCours(null).then(data => data.data)
 }
 
 export default class Cours extends Component {
@@ -127,15 +127,35 @@ export default class Cours extends Component {
     if (this.state.creneaux === null) {
       return (<div>
         <h3>Liste des creneaux</h3>
-        Loading
+        Loading ...
       </div>)
     } else {
       return (<div>
         <h3>Liste des creneaux</h3>
+        <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
         <TableCreneaux
           creneaux={ this.state.creneaux }
           triggerModifier={ this.triggerShowModifier.bind(this) }
+          triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
         />
+        {this.state.showAjouter &&
+          <div class="dialog-overlay">
+            <div class="dialog">
+              <h3>Ajouter un creneau</h3>
+              <FormCreneau trigger={  this.triggerAjouter.bind(this) }/>
+              <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
+            </div>
+          </div>
+        }
+        {this.state.showSupprimer &&
+          <div class="dialog-overlay">
+            <div class="dialog">
+              <h3>Confirmer la suppression de { this.state.selected.intitule }</h3>
+              <button class="button-confirm" onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
+              <button class="button-cancel" onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
+            </div>
+          </div>
+        }
         {this.state.showModifier &&
           <div class="dialog-overlay">
             <div class="dialog">

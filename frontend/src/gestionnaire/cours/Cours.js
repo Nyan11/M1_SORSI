@@ -5,16 +5,16 @@ import Service from '../../services/gestionnaire.service'
 
 
 async function modifier(itemNew, itemOld) {
-  return await Service.updateCours(itemNew).then(data => data.data)
+  return Service.updateCours(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return await Service.deleteCours(item).then(data => data.data)
+  return Service.deleteCours(item).then(data => data.data)
 }
 async function ajouter(item) {
-  return await Service.createCours(item).then(data => data.data)
+  return Service.createCours(item).then(data => data.data)
 }
 async function updateView() {
-  return await Service.getCours().then(data => data.data)
+  return Service.getCours().then(data => data.data)
 }
 
 export default class Cours extends Component {
@@ -40,11 +40,6 @@ export default class Cours extends Component {
         })
       }
     )
-  }
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
-    }
   }
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
@@ -92,6 +87,7 @@ export default class Cours extends Component {
     if (this.state.cours === null) {
       return (<div>
         <h3>Liste des cours</h3>
+        Loading ...
       </div>)
     } else {
       return (<div>

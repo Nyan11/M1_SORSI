@@ -9,14 +9,6 @@ export default class TableComposantes extends Component {
       triggerSupprimer: props.triggerSupprimer,
     }
   }
-  handleModifierClicked(event) {
-    console.log(event)
-    this.state.triggerModifier()
-  }
-  handleSupprimerClicked(event) {
-    console.log(event)
-    this.state.triggerSupprimer()
-  }
   render() {
     return(
       <table>

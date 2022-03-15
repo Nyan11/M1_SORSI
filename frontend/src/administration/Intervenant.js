@@ -4,16 +4,16 @@ import AdministrationService from '../services/administration.service'
 
 
 async function modifier(userNew, userOld) {
-  return await AdministrationService.updateIntervenant(userNew).then(data => data.data)
+  return AdministrationService.updateIntervenant(userNew).then(data => data.data)
 }
 async function supprimer(user) {
-  return await AdministrationService.deleteIntervenant(user).then(data => data.data)
+  return AdministrationService.deleteIntervenant(user).then(data => data.data)
 }
 async function ajouter(user) {
-  return await AdministrationService.createIntervenant(user).then(data => data.data)
+  return AdministrationService.createIntervenant(user).then(data => data.data)
 }
 async function updateView() {
-  return await AdministrationService.getIntervenants().then(data => data.data)
+  return AdministrationService.getIntervenants().then(data => data.data)
 }
 
 class Intervenant extends Component {
@@ -30,11 +30,6 @@ class Intervenant extends Component {
         this.setState({liste: users});
       }
     );
-  }
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
-    }
   }
   render() {
     if (this.state.liste === null) {

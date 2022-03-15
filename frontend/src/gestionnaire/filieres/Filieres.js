@@ -3,21 +3,21 @@ import TableFilieres from './TableFilieres'
 import FormFiliere from './FormFiliere'
 import Service from '../../services/gestionnaire.service'
 
-async function getComposantes() {
-  return await Service.getComposante().then(data => data.data)
-}
 
+async function getComposantes() {
+  return Service.getComposante().then(data => data.data)
+}
 async function modifier(itemNew, itemOld) {
-  return await Service.updateFiliere(itemNew).then(data => data.data)
+  return Service.updateFiliere(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return await Service.deleteFiliere({id: item.idFiliereLangue}).then(data => data.data)
+  return Service.deleteFiliere({id: item.idFiliereLangue}).then(data => data.data)
 }
 async function ajouter(item) {
-  return await Service.createFiliere(item).then(data => data.data)
+  return Service.createFiliere(item).then(data => data.data)
 }
 async function updateView() {
-  return await Service.getFilieres().then(data => data.data)
+  return Service.getFilieres().then(data => data.data)
 }
 
 export default class Filieres extends Component {
@@ -39,7 +39,7 @@ export default class Filieres extends Component {
   componentDidMount() {
     this._asyncRequestFilieres = updateView().then(
       liste => {
-        this._asyncRequest = null
+        this._asyncRequestFilieres = null
         this.setState((state) => {
           return {...state, filieres: liste}
         })
@@ -47,20 +47,12 @@ export default class Filieres extends Component {
     )
     this._asyncRequestComposantes = getComposantes().then(
       liste => {
-        this._asyncRequest = null
+        this._asyncRequestComposantes = null
         this.setState((state) => {
           return {...state, composantes: liste, ready: true}
         })
       }
     )
-  }
-  componentWillUnmount() {
-    if (this._asyncRequestFilieres) {
-      this._asyncRequestFilieres.cancel();
-    }
-    if (this._asyncRequestComposantes) {
-      this._asyncRequestComposantes.cancel();
-    }
   }
   async triggerAjouter(filiere) {
     this.state.actionAjouter(filiere)
@@ -108,7 +100,7 @@ export default class Filieres extends Component {
       if (!this.state.ready || !this.state.filieres) {
         return (<div>
           <h3>Liste des filieres</h3>
-          Loading
+          Loading ...
         </div>)
       } else {
       return (<div>

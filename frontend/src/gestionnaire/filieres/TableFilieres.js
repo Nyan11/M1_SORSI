@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Service from '../../services/gestionnaire.service'
+
 
 export default class TableFilieres extends Component {
   constructor(props) {
@@ -10,12 +10,6 @@ export default class TableFilieres extends Component {
       triggerSupprimer: props.triggerSupprimer,
       composantes: props.composantes,
     }
-  }
-  handleModifierClicked(event) {
-    this.state.triggerModifier()
-  }
-  handleSupprimerClicked(event) {
-    this.state.triggerSupprimer()
   }
   render() {
     return(

@@ -5,16 +5,16 @@ import Service from '../../services/gestionnaire.service'
 
 
 async function modifier(itemNew, itemOld) {
-  return await Service.updateComposante(itemNew).then(data => data.data)
+  return Service.updateComposante(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return await Service.deleteComposante(item).then(data => data.data)
+  return Service.deleteComposante(item).then(data => data.data)
 }
 async function ajouter(item) {
-  return await Service.createComposante({...item, idGestionnaire: 10}).then(data => data.data)
+  return Service.createComposante({...item, idGestionnaire: 10}).then(data => data.data)
 }
 async function updateView() {
-  return await Service.getComposante().then(data => data.data)
+  return Service.getComposante().then(data => data.data)
 }
 
 export default class Composantes extends Component {
@@ -40,11 +40,6 @@ export default class Composantes extends Component {
         })
       }
     )
-  }
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
-    }
   }
   triggerAjouter(user) {
     this.state.actionAjouter(user)
@@ -115,7 +110,7 @@ export default class Composantes extends Component {
         {this.state.showSupprimer &&
           <div class="dialog-overlay">
             <div class="dialog">
-              <h3>Confirmer la suppression de { this.state.selected.nom }</h3>
+              <h3>Confirmer la suppression de { this.state.selected.nomComposante }</h3>
               <button class="button-confirm" onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
               <button class="button-cancel" onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
             </div>
@@ -124,7 +119,7 @@ export default class Composantes extends Component {
         {this.state.showModifier &&
           <div class="dialog-overlay">
             <div class="dialog">
-              <h3>Modification de { this.state.selected.nom }</h3>
+              <h3>Modification de { this.state.selected.nomComposante }</h3>
               <FormComposante composante={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
               <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
             </div>

@@ -4,16 +4,16 @@ import AdministrationService from '../services/administration.service'
 
 
 async function modifier(userNew, userOld) {
-  return await AdministrationService.updateGestionnaire(userNew).then(data => data.data)
+  return AdministrationService.updateGestionnaire(userNew).then(data => data.data)
 }
 async function supprimer(user) {
-  return await AdministrationService.deleteGestionnaire({login: user.login}).then(data => data.data)
+  return AdministrationService.deleteGestionnaire({login: user.login}).then(data => data.data)
 }
 async function ajouter(user) {
-  return await AdministrationService.createGestionnaire(user).then(data => data.data)
+  return AdministrationService.createGestionnaire(user).then(data => data.data)
 }
 async function updateView() {
-  return await AdministrationService.getGestionnaires().then(data => data.data)
+  return AdministrationService.getGestionnaires().then(data => data.data)
 }
 
 export default class Gestionnaire extends Component {
@@ -30,11 +30,6 @@ export default class Gestionnaire extends Component {
         this.setState({liste: users});
       }
     );
-  }
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
-    }
   }
   render() {
     if (this.state.liste === null) {

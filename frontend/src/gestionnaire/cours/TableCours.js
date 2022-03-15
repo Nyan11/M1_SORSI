@@ -9,12 +9,6 @@ export default class TableCours extends Component {
       triggerSupprimer: props.triggerSupprimer,
     }
   }
-  handleModifierClicked(event) {
-    this.state.triggerModifier()
-  }
-  handleSupprimerClicked(event) {
-    this.state.triggerSupprimer()
-  }
   render() {
     return(
       <table>
@@ -65,4 +59,3 @@ class RowTableCours extends Component {
     )
   }
 }
-

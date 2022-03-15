@@ -6,6 +6,7 @@ export default class TableCreneaux extends Component {
     this.state = {
       creneaux: props.creneaux,
       triggerModifier: props.triggerModifier,
+      triggerSupprimer: props.triggerSupprimer,
     }
   }
   render() {
@@ -20,6 +21,7 @@ export default class TableCreneaux extends Component {
             <td>salle</td>
             <td>heureDebut</td>
             <td>heureFin</td>
+            <td>supprimer</td>
             <td>modifier</td>
           </tr>
         </thead>
@@ -29,6 +31,7 @@ export default class TableCreneaux extends Component {
               key={ index }
               creneau={ item }
               triggerModifier={ this.state.triggerModifier }
+              triggerSupprimer={ this.state.triggerSupprimer }
             />
           )}
         </tbody>
@@ -43,10 +46,15 @@ class RowTableCreneau extends Component {
     this.state = {
       creneau: props.creneau,
       triggerModifier: props.triggerModifier,
+      triggerSupprimer: props.triggerSupprimer,
     }
   }
   handleModifierClicked(event) {
     this.state.triggerModifier(this.state.creneau)
+  }
+  handleSupprimerClicked(event) {
+    console.log(event)
+    this.state.triggerSupprimer(this.state.creneau)
   }
   render() {
     return(
@@ -58,6 +66,7 @@ class RowTableCreneau extends Component {
         <td>{ this.state.creneau.salle }</td>
         <td>{ this.state.creneau.heureDebut }</td>
         <td>{ this.state.creneau.heureFin }</td>
+        <td><button onClick={ this.handleSupprimerClicked.bind(this) }>supprimer</button></td>
         <td><button onClick={ this.handleModifierClicked.bind(this) }>modifier</button></td>
       </tr>
     )

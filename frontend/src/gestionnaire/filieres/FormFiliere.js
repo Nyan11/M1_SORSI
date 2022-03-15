@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Service from '../../services/gestionnaire.service'
 
 
 export default class FormFiliere extends Component {

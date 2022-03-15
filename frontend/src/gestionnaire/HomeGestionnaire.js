@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom"
 import Composante from './composantes/Composantes'
+import Creneau from './creneaux/Creneaux'
 import Filiere from './filieres/Filieres'
 import Cours from './cours/Cours'
 import Login from '../other/Login'
@@ -28,6 +29,9 @@ class NavBarGestionnaire extends Component {
   }
   changeLinkCours() {
     this.setState({selected: "/cours"})
+  }
+  changeLinkCreneau() {
+    this.setState({selected: "/creneau"})
   }
   render() {
     return <div>
@@ -73,6 +77,14 @@ class NavBarGestionnaire extends Component {
             >Cours
             </Link>
           </li>
+          <li>
+            <Link
+              class={this.state.selected === "/creneau" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkCreneau.bind(this)}
+              to="/gestionnaire/creneau"
+            >Creneau
+            </Link>
+          </li>
         </ul>
       </nav>
       <Outlet />
@@ -88,6 +100,7 @@ function Home() {
         <Composante />
         <Filiere />
         <Cours />
+        <Creneau />
       </div>
     </div>
   );
@@ -104,6 +117,7 @@ export default class HomeGestionnaire extends Component {
             <Route path="composante" element={<Composante />} />
             <Route path="filiere" element={<Filiere />} />
             <Route path="cours" element={<Cours />} />
+            <Route path="creneau" element={<Creneau />} />
             <Route path="*" element={<NoMatch path="/gestionnaire"/>} />
           </Route>
         </Routes>
