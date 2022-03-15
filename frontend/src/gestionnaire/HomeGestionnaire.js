@@ -5,6 +5,7 @@ import Filiere from './filieres/Filieres'
 import Cours from './cours/Cours'
 import Login from '../other/Login'
 import Auth from '../services/auth.service'
+import NoMatch from '../other/NoMatch'
 
 class NavBarGestionnaire extends Component {
   constructor(props) {
@@ -92,18 +93,7 @@ function Home() {
   );
 }
 
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
-    </div>
-  );
-}
-
-export default class Gestionnaire extends Component {
+export default class HomeGestionnaire extends Component {
   render() {
     if (Auth.isLogAsGestionnaire()) {
       return <div className="App">
@@ -114,7 +104,7 @@ export default class Gestionnaire extends Component {
             <Route path="composante" element={<Composante />} />
             <Route path="filiere" element={<Filiere />} />
             <Route path="cours" element={<Cours />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="*" element={<NoMatch path="/gestionnaire"/>} />
           </Route>
         </Routes>
       </div>

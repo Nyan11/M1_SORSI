@@ -1,10 +1,11 @@
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import './App.css'
-import Administration from './administration/Administration'
-import Gestionnaire from './gestionnaire/Gestionnaire'
-import Intervenant from './intervenant/Intervenant'
+import Administration from './administration/HomeAdministration'
+import Gestionnaire from './gestionnaire/HomeGestionnaire'
+import Intervenant from './intervenant/HomeIntervenant'
 import Login from './other/Login'
 import NavBar from './other/NavBar'
+import NoMatch from './other/NoMatch'
 import Auth from './services/auth.service'
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
           />
           <Route
             path="*"
-            element={<NoMatch />}
+            element={<NoMatch path="/"/>}
           />
         </Route>
       </Routes>
@@ -73,17 +74,6 @@ function Home() {
       </div>
     );
   }
-}
-
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
-    </div>
-  );
 }
 
 export default App;

@@ -4,6 +4,7 @@ import Gestionnaire from './Gestionnaire'
 import Intervenant from './Intervenant'
 import Login from '../other/Login'
 import Auth from '../services/auth.service'
+import NoMatch from '../other/NoMatch'
 
 class NavBarAdministration extends Component {
   constructor(props) {
@@ -79,18 +80,7 @@ function Home() {
   );
 }
 
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
-    </div>
-  );
-}
-
-export default class Administration extends Component {
+export default class HomeAdministration extends Component {
   render() {
     if (Auth.isLogAsAdmin()) {
       return <div className="App">
@@ -100,7 +90,7 @@ export default class Administration extends Component {
             <Route path="login" element={<Login category="administration" />} />
             <Route path="gestionnaire" element={<Gestionnaire />} />
             <Route path="intervenant" element={<Intervenant />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="*" element={<NoMatch path="/administration"/>} />
           </Route>
         </Routes>
       </div>

@@ -3,6 +3,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom"
 import Creneaux from './Creneaux'
 import Login from '../other/Login'
 import Auth from '../services/auth.service'
+import NoMatch from '../other/NoMatch'
 
 class NavBarIntervenant extends Component {
   constructor(props) {
@@ -66,18 +67,7 @@ function Home() {
   );
 }
 
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
-    </div>
-  );
-}
-
-export default class Intervenant extends Component {
+export default class HomeIntervenant extends Component {
   render() {
     if (Auth.isLogAsIntervenant()) {
       return <div className="App">
@@ -86,7 +76,7 @@ export default class Intervenant extends Component {
             <Route index element={<Home />} />
             <Route path="login" element={<Login category="intervenant" />} />
             <Route path="creneaux" element={<Creneaux />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route path="*" element={<NoMatch path="/intervenant"/>} />
           </Route>
         </Routes>
       </div>
