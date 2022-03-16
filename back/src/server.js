@@ -38,6 +38,9 @@ app.put('/filiereslangue', require('./routes/put/putFiliereLangue'));
 app.post('/filiereslangue', require('./routes/post/postFiliereLangue'));
 app.delete('/filiereslangue', require('./routes/delete/delFiliereLangue'));
 
+app.post('/concerne', require('./routes/post/postConcerne'));
+app.post('/participe', require('./routes/post/postParticipe'));
+
 //start server
 app.listen(8080, function () {
     console.log('\nDémarrage du serveur réussi avec succès !\n')

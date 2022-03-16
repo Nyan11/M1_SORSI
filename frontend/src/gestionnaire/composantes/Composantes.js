@@ -5,13 +5,13 @@ import Service from '../../services/gestionnaire.service'
 
 
 async function modifier(itemNew, itemOld) {
-  return Service.updateComposante(itemNew).then(data => data.data)
+  Service.updateComposante(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return Service.deleteComposante(item).then(data => data.data)
+  Service.deleteComposante(item).then(data => data.data)
 }
 async function ajouter(item) {
-  return Service.createComposante({...item, idGestionnaire: 10}).then(data => data.data)
+  Service.createComposante({...item, idGestionnaire: 10}).then(data => data.data)
 }
 async function updateView() {
   return Service.getComposante().then(data => data.data)

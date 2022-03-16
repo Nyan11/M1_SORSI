@@ -4,6 +4,8 @@ const axios = require('axios')
 
 const API_URL_COMPOSANTE = "http://localhost:8080/composantes"
 const API_URL_COURS = "http://localhost:8080/cours"
+const API_URL_CONCERNE = "http://localhost:8080/concerne"
+const API_URL_PARTICIPE = "http://localhost:8080/participe"
 const API_URL_FILIERE = "http://localhost:8080/filiereslangue"
 class GestionnaireService {
   /* Composante */
@@ -23,14 +25,19 @@ class GestionnaireService {
   getCours() {
     return axios.get(API_URL_COURS, headers())
   }
-  updateCours(item) {
-    return axios.post(API_URL_COURS, item, headers())
+  updateCours(cours, concerne, participe) {
+    axios.post(API_URL_COURS, cours, headers())
+    axios.post(API_URL_CONCERNE, {idCours: cours.id, filieres: concerne}, headers())
+    axios.post(API_URL_PARTICIPE, {idCours: cours.id, intervenants: participe}, headers())
   }
-  createCours(item) {
-    return axios.put(API_URL_COURS, item, headers())
+  createCours(cours, concerne, participe) {
+    axios.put(API_URL_COURS, { intitule: cours }, headers()).then(res => {
+      axios.post(API_URL_CONCERNE, {idCours: res.data.id, filieres: concerne}, headers())
+      return axios.post(API_URL_PARTICIPE, {idCours: res.data.id, intervenants: participe}, headers())
+    })
   }
-  deleteCours(item) {
-    return axios.delete(API_URL_COURS, {data: item}, headers())
+  deleteCours(cours) {
+    return axios.delete(API_URL_COURS, {data: cours}, headers())
   }
   /* Filiere */
   getFilieres() {

@@ -48,7 +48,7 @@ export default class FormFiliere extends Component {
         />
       </div>
       <div>
-        <label for="nomFiliereLangue">nom : </label>
+        <label for="nomFiliereLangue">nom filiere : </label>
         <input
           type="text"
           name="nomFiliereLangue"
@@ -59,7 +59,7 @@ export default class FormFiliere extends Component {
         />
       </div>
       <div>
-        <label for="idComposante">code : </label>
+        <label for="idComposante">composante : </label>
         <select id="idComposante" name="idComposante" value={this.state.filiere.idComposante} onChange={this.handleInputChanged.bind(this)}>
           {this.state.composantes.map((composante, index) =>
             <option

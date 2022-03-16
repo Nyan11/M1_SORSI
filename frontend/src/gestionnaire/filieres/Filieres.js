@@ -8,13 +8,13 @@ async function getComposantes() {
   return Service.getComposante().then(data => data.data)
 }
 async function modifier(itemNew, itemOld) {
-  return Service.updateFiliere(itemNew).then(data => data.data)
+  Service.updateFiliere(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return Service.deleteFiliere({id: item.idFiliereLangue}).then(data => data.data)
+  Service.deleteFiliere({id: item.idFiliereLangue}).then(data => data.data)
 }
 async function ajouter(item) {
-  return Service.createFiliere(item).then(data => data.data)
+  Service.createFiliere(item).then(data => data.data)
 }
 async function updateView() {
   return Service.getFilieres().then(data => data.data)
