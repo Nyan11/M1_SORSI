@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Auth from '../services/auth.service'
 
 async function connect(credential, category) {
-  var auth = Auth.login(credential.login, credential.password)
+  var auth = Auth.login(credential.login, credential.password, category)
   var isConnected = await auth
   if (isConnected) {
     window.location.pathname = "/" + category

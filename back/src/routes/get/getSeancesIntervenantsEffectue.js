@@ -3,9 +3,9 @@ const router = require('express').Router();
 
 router.get('/getSeanceIntervenants', (req, res) => {
 
-    const { idIntervenant } = req.body;
+    const { idIntervenant } = req.query;
 
-    let sql = "SELECT SEANCE_FORMATION.id as idSeance, idIntervenant, nomUsuel as nomIntervenant, estEffectue, dureeEffective, valide, commentaire, idCreneau, date_heure, type as typeCours, salle, idCours, intitule as nomCours FROM SEANCE_FORMATION JOIN INTERVENANT ON INTERVENANT.id = SEANCE_FORMATION.idIntervenant JOIN CRENEAU ON CRENEAU.id = SEANCE_FORMATION.idCreneau JOIN COURS ON COURS.id = CRENEAU.idCours WHERE SEANCE_FORMATION.idIntervenant = 18 AND estEffectue = 1 ORDER BY COURS.intitule";
+    let sql = "SELECT SEANCE_FORMATION.idSeanceFormation as idSeance, idIntervenant, nomUsuel as nomIntervenant, estEffectue, dureeEffective, valide, commentaire, idCreneau, date_heure, type as typeCours, salle, idCours, intitule as nomCours FROM SEANCE_FORMATION JOIN INTERVENANT ON INTERVENANT.id = SEANCE_FORMATION.idIntervenant JOIN CRENEAU ON CRENEAU.id = SEANCE_FORMATION.idCreneau JOIN COURS ON COURS.id = CRENEAU.idCours WHERE SEANCE_FORMATION.idIntervenant = 18 AND estEffectue = 1 ORDER BY COURS.intitule";
     connexion.query(sql, [idIntervenant], function (err, data) {
 
         if (err) {

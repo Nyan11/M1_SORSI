@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.get('/getTotalHeuresIntervenants', (req, res) => {
 
-    const { idIntervenant } = req.body;
+    const { idIntervenant } = req.query;
 
     let sql = "SELECT SUM(dureeEffective) as totalHeures FROM SEANCE_FORMATION WHERE idIntervenant = ?";
     connexion.query(sql, [idIntervenant], function (err, data) {

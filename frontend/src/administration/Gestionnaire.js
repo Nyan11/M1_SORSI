@@ -20,7 +20,7 @@ export default class Gestionnaire extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      liste: null,
+      liste: [],
     }
   }
   componentDidMount() {
