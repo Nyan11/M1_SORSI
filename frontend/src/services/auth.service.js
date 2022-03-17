@@ -15,7 +15,7 @@ class AuthService {
       type = 3
     }
     return axios.post(API_URL, {login: login, password: password, type: type}).then(response => {
-      localStorage.setItem("token", JSON.stringify({accessToken: response.data}))
+      localStorage.setItem("token", JSON.stringify({accessToken: response.data.jwt}))
       localStorage.setItem("isLog", true)
       localStorage.setItem("category", category)
       return true

@@ -3,15 +3,14 @@ import headers from './headers.service'
 const axios = require('axios')
 
 const API_URL_SEANCES = "http://localhost:8080/seances";
-const API_URL_SEANCE_INTERVENANTS = "http://localhost:8080/getSeanceIntervenants";
-const API_URL_INTERVENANTS = "http://localhost:8080/intervenants";
+const API_URL_SEANCE_INTERVENANTS = "http://localhost:8080/getSeancesIntervenants";
 class SeanceService {
   /* Séances */
   getSeances() {
     return axios.get(API_URL_SEANCES, headers())
   }
   /* Séances intervenants */
-  getSeance(id) {
+  getSeancesIntervenants(id) {
     return axios.get(API_URL_SEANCE_INTERVENANTS + "?idIntervenant=" + id, headers())
   }
   updateSeance(user) {

@@ -6,7 +6,9 @@ export default class FormComposante extends Component {
     this.state = {
       composante: {},
       submitValue: "Ajouter",
-      trigger: () => {}
+      trigger: () => {},
+      responsables: props.responsables,
+      idResponsable: -1,
     }
     if (props.composante) {
       this.state.composante = props.composante
@@ -18,7 +20,6 @@ export default class FormComposante extends Component {
       this.state.trigger = props.trigger
     }
   }
-
   handleInputChanged(event) {
     const oldItem = this.state.composante
     const newItem = { ...oldItem, [event.target.id]: event.target.value }
@@ -27,14 +28,11 @@ export default class FormComposante extends Component {
       composante: newItem
     });
   }
-
   handleSubmitClicked(event) {
     var item = this.state.composante
     event.preventDefault()
     this.state.trigger(item)
-    console.log('debug')
   }
-
   render() {
     return (
     <form onSubmit={this.handleSubmitClicked.bind(this)}>
@@ -48,6 +46,17 @@ export default class FormComposante extends Component {
           onChange={this.handleInputChanged.bind(this)}
           required
         />
+      </div>
+      <div>
+        <label for="idResponsable">composante : </label>
+        <select id="idResponsable" name="idResponsable" value={this.state.composante.idResponsable} onChange={this.handleInputChanged.bind(this)}>
+          {this.state.responsables.map((responsable, index) =>
+            <option
+              key={ index }
+              value={ responsable.idResponsable }
+            >{responsable.nomUsuel + " " + responsable.prenom + " <" + responsable.mail + ">"}</option>
+          )}
+        </select>
       </div>
       <div>
         <input type="submit" value={ this.state.submitValue }/>

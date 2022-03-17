@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import TableComposantes from './TableComposantes'
 import FormComposante from './FormComposante'
 import Service from '../../services/gestionnaire.service'
+import Admin from '../../services/administration.service'
 
-
+async function getResponsables() {
+  return Admin.getResponsables().then(data => data.data)
+}
 async function modifier(itemNew, itemOld) {
   Service.updateComposante(itemNew).then(data => data.data)
 }
@@ -11,7 +14,7 @@ async function supprimer(item) {
   Service.deleteComposante(item).then(data => data.data)
 }
 async function ajouter(item) {
-  Service.createComposante({...item, idGestionnaire: 10}).then(data => data.data)
+  Service.createComposante(item).then(data => data.data)
 }
 async function updateView() {
   return Service.getComposante().then(data => data.data)
@@ -28,21 +31,31 @@ export default class Composantes extends Component {
       actionAjouter: ajouter,
       actionSupprimer: supprimer,
       actionModifier: modifier,
+      responsables: [],
+      ready: false,
       selected: {},
     }
   }
   componentDidMount() {
-    this._asyncRequest = updateView().then(
+    this._asyncRequestComposantes = updateView().then(
       liste => {
-        this._asyncRequest = null
+        this._asyncRequestComposantes = null
         this.setState((state) => {
           return {...state, composantes: liste}
         })
       }
     )
+    this._asyncRequestResponsables = getResponsables().then(
+      liste => {
+        this._asyncRequestResponsables = null
+        this.setState((state) => {
+          return {...state, responsables: liste, ready: true}
+        })
+      }
+    )
   }
-  triggerAjouter(user) {
-    this.state.actionAjouter(user)
+  triggerAjouter(composante) {
+    this.state.actionAjouter(composante)
     window.location.reload(false)
   }
   triggerShowAjouter() {
@@ -84,7 +97,7 @@ export default class Composantes extends Component {
     })
   }
   render() {
-    if (this.state.composantes === null) {
+    if (!this.state.ready || this.state.composantes === null) {
       return (<div>
         <h3>Liste des composantes</h3>
         Loading ...
@@ -95,6 +108,7 @@ export default class Composantes extends Component {
         <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
         <TableComposantes
           composantes={ this.state.composantes }
+          responsables={this.state.responsables}
           triggerModifier={ this.triggerShowModifier.bind(this) }
           triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
         />
@@ -102,7 +116,7 @@ export default class Composantes extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Ajouter une composante</h3>
-              <FormComposante trigger={  this.triggerAjouter.bind(this) }/>
+              <FormComposante trigger={ this.triggerAjouter.bind(this)} responsables={this.state.responsables} />
               <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
             </div>
           </div>
@@ -120,7 +134,7 @@ export default class Composantes extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Modification de { this.state.selected.nomComposante }</h3>
-              <FormComposante composante={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+              <FormComposante responsables={this.state.responsables} composante={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
               <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
             </div>
           </div>

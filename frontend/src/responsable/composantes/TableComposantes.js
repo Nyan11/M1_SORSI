@@ -5,6 +5,7 @@ export default class TableComposantes extends Component {
     super(props)
     this.state = {
       composantes: props.composantes,
+      responsables: props.responsables,
     }
   }
   render() {
@@ -13,6 +14,7 @@ export default class TableComposantes extends Component {
         <thead>
           <tr>
             <td>nom</td>
+            <td>responsable</td>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +22,7 @@ export default class TableComposantes extends Component {
             <RowTableComposante
               key={ index }
               composante={ composante }
+              responsable={ this.state.responsables.find(res => res.idResponsable === composante.idResponsable ) }
             />
           )}
         </tbody>
@@ -33,12 +36,14 @@ class RowTableComposante extends Component {
     super(props)
     this.state = {
       composante: props.composante,
+      responsable: props.responsable,
     }
   }
   render() {
     return(
       <tr>
         <td>{ this.state.composante.nomComposante }</td>
+        <td>{ this.state.responsable.nomUsuel + " " + this.state.responsable.prenom + " <" + this.state.responsable.mail + ">" }</td>
       </tr>
     )
   }
