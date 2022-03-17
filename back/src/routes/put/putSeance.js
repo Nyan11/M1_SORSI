@@ -7,7 +7,7 @@ router.put('/seances', function (req, res) {
 
     let sql = "INSERT INTO SEANCE_FORMATION(idIntervenant, idCreneau, estEffectue, dureeEffective, valide, commentaire) VALUES (?, ?, ?, ?, ?, ?)";
 
-    connexion.query(sql, [idIntervenant, idCreneau, 0, null, 0, null ], function (err, data, fields) {
+    connexion.query(sql, [idIntervenant, idCreneau, 0, 0, 0, '' ], function (err, data, fields) {
 
         if (err) res.status(500).json(err);
         if (data.affectedRows === 0) {

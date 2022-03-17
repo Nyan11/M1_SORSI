@@ -1,11 +1,11 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
 
-router.post('/seance', function (req, res) {
+router.post('/seances', function (req, res) {
 
     const { idSeance,  estEffectue, dureeEffective, valide, commentaire} = req.body;
 
-    let sql = "UPDATE SEANCE_FORMATION SET estEffectue = ?, dureeEffective = ?, valide = ?,commentaire = ? WHERE id = ?";
+    let sql = "UPDATE SEANCE_FORMATION SET estEffectue = ?, dureeEffective = ?, valide = ?,commentaire = ? WHERE idSeanceFormation = ?";
 
     connexion.query(sql, [estEffectue, dureeEffective, valide, commentaire, idSeance], function (err, data, fields) {
 

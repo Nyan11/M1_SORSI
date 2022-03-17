@@ -41,6 +41,13 @@ app.delete('/filiereslangue', require('./routes/delete/delFiliereLangue'));
 app.post('/concerne', require('./routes/post/postConcerne'));
 app.post('/participe', require('./routes/post/postParticipe'));
 
+
+app.get('/getSeanceIntervenants', require('./routes/get/getSeanceIntervenants')); //recupere toutes les seances lié a un intervenant
+app.get('/getSeanceIntervenantsEffectue', require('./routes/get/getSeancesIntervenantsEffectue')); //heures effectué pour que un gestionnaire valide
+app.get('/getTotalHeuresIntervenants', require('./routes/get/getTotalHeureIntervenant')); //renvoie le total d'heures effectué par un intervenant
+app.post('/seances', require('./routes/post/postSeance')); //pointage des heures pour l'intervenant et/ou validation du pointage par un gestionnaire
+app.put('/seances', require('./routes/put/putSeance')); //creéation de la seance par un intervenant
+
 //start server
 app.listen(8080, function () {
     console.log('\nDémarrage du serveur réussi avec succès !\n')
