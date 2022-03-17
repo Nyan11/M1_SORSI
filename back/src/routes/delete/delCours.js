@@ -11,7 +11,7 @@ router.delete('/cours', (req, res) => {
         });
     }
 
-    let SQLRequest = "DELETE FROM COURS WHERE id = ?";
+    const SQLRequest = "DELETE FROM COURS WHERE id = ?";
     connexion.query(SQLRequest,[id_cours] , (error , result) => {
 
         if(error) throw error;

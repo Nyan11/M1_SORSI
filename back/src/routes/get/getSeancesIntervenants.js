@@ -1,7 +1,7 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
 
-router.get('/getSeanceIntervenants', (req, res) => {
+router.get('/getSeancesIntervenants', (req, res) => {
 
     const { idIntervenant } = req.query;
 

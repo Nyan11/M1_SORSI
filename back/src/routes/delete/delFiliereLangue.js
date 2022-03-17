@@ -7,31 +7,44 @@ router.delete('/filiereslangue', (req, res) => {
     if (!id_filiere) {
         return res.status(400).json({
             error: true,
-            message:  "Merci de spécifier le login du gestionnaire à supprimer"
+            message:  "Merci de spécifier l'id de la filière langue à supprimer"
         });
     }
 
 
-    //TODO VOIR CE QU'IL Y A SUPPRIMER POUR UN COURS
-    let SQLRequest = "DELETE FROM GESTIONNAIRE WHERE login = ?";
-    connexion.query(SQLRequest,[id_filiere] , (error , result) => {
+    //Vérification que la filière ne sois pas lier à un cours
+    const SQLRequest = "SELECT * FROM FILIERE_LANGUE INNER JOIN CONCERNE ON FILIERE_LANGUE.idFiliereLangue = CONCERNE.idFiliereLangue WHERE FILIERE_LANGUE.idFiliereLangue = ?";
+    connexion.query(SQLRequest,[id_filiere],async (error, result) => {
 
         if(error) throw error;
-
-        if (result.affectedRows > 0) {
+        if (result.length > 0) {
             res.status(200).json({
-                error: false,
-                message: "Le gestionnaire à bien été supprimé !"
+                "error":true,
+                "message":"Impossible de supprimer la filière langue car elle est lié a un/des cours"
             });
         }
         else {
-            res.status(404).json({
-                error: true,
-                message: "Aucun gestionnaire avec ce login trouvé !"
-            });
 
+            //Suppression de la filière
+            const SQLRequest = "DELETE FROM FILIERE_LANGUE WHERE idFiliereLangue = ?";
+            await connexion.query(SQLRequest, [id_filiere], async (error, result) => {
+
+                if (error) throw error;
+
+                if (result.affectedRows > 0) {
+                    res.status(200).json({
+                        error: false,
+                        message: "La filière à bien été supprimé !"
+                    });
+                    console.log("FUNCTION CALL : [DELETE] - Suppression de la filiere langue avec l'id " + id_filiere);
+                } else {
+                    res.status(404).json({
+                        error: true,
+                        message: "Aucune filière avec cet id trouvé !"
+                    });
+                }
+            });
         }
-        console.log("FUNCTION CALL : [DELETE] - Suppression du gestionnaire avec le login "+id_filiere);
     });
 });
 

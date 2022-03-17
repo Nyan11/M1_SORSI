@@ -1,4 +1,6 @@
 const connexion = require("../../db/sql");
+const jwt = require('jsonwebtoken');
+
 const router = require('express').Router();
 
 router.delete('/intervenants', (req, res) => {
@@ -11,25 +13,40 @@ router.delete('/intervenants', (req, res) => {
         });
     }
 
-    let SQLRequest = "DELETE FROM INTERVENANT WHERE login = ?";
-    connexion.query(SQLRequest,[login_intervenant] , (error , result) => {
+    //Vérification que l'intervenant ne sois pas lier à un cours
+    const SQLRequest = "SELECT * FROM INTERVENANT INNER JOIN PARTICIPE_A ON INTERVENANT.idIntervenant = PARTICIPE_A.idIntervenant AND INTERVENANT.login = ?";
+    connexion.query(SQLRequest,[login_intervenant],async (error, result) => {
 
         if(error) throw error;
-
-        if (result.affectedRows > 0) {
+        if (result.length > 0) {
             res.status(200).json({
-                error: false,
-                message: "L'invervenant à bien été supprimé !"
+               "error":true,
+                "message":"Impossible de supprimer l'intervenant car il est lié a un/des cours !"
             });
         }
         else {
-            res.status(404).json({
-                error: true,
-                message: "Aucun intervenant avec ce login trouvé !"
-            });
 
+            //Suppression de l'intervenant
+            const SQLRequest = "DELETE FROM INTERVENANT WHERE login = ?";
+            await connexion.query(SQLRequest, [login_intervenant], async (error, result) => {
+
+                if (error) throw error;
+
+                if (result.affectedRows > 0) {
+                    res.status(200).json({
+                        error: false,
+                        message: "L'invervenant à bien été supprimé !"
+                    });
+                    console.log("FUNCTION CALL : [DELETE] - Suppression de l'intervant avec le login " + login_intervenant);
+                } else {
+                    res.status(404).json({
+                        error: true,
+                        message: "Aucun intervenant avec ce login trouvé !"
+                    });
+
+                }
+            });
         }
-        console.log("FUNCTION CALL : [DELETE] - Suppression de l'intervant avec le login "+login_intervenant);
     });
 });
 

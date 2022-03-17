@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken');
 const jwtConfig = require('./jwtConfig');
 
 
-exports.createJwt = function (login, password, type) {
+exports.createJwt = function (id, login, password, type) {
 
     return jwt.sign(
-        {login, password, type},
+        {id, login, password, type},
         jwtConfig.PRIVATE_KET,
         {
             expiresIn: "1h",
@@ -37,9 +37,12 @@ exports.getJtw = function (token) {
 }
 
 
-exports.checkPermission = function (wantedPermission, token) {
+exports.checkPermission = function (wantedPermission, jwt) {
 
-    const tokenPermission = token.type;
+    const tokenPermission = jwt.type;
     return tokenPermission <= wantedPermission;
+}
 
+exports.getUserId = function (jwt) {
+    return jwt.id;
 }

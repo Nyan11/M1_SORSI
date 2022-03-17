@@ -1,6 +1,7 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
 const jwtManager = require('../../jwt/jwtManager');
+const e = require("express");
 
 router.post('/login',(req, res) => {
 
@@ -23,7 +24,6 @@ router.post('/login',(req, res) => {
         return;
     }
 
-
     let userType;
     if (type === 0) userType = "ADMINISTRATEUR";
     else if (type === 1) userType = "GESTIONNAIRE";
@@ -34,10 +34,9 @@ router.post('/login',(req, res) => {
             error: true,
             message: "Le type d'utilisateur n'est pas correct"
         })
-        return;
     }
 
-    const request = "SELECT * FROM " + userType + " WHERE login=? AND motDePasse=?";
+    const request = "SELECT * FROM "+ userType +" WHERE login=? AND motDePasse=?";
 
     connexion.query(request,[login,password], async function (error, result) {
 
@@ -50,10 +49,20 @@ router.post('/login',(req, res) => {
                 })
             }
             else {
-                res.status(200).json(jwtManager.createJwt(login, password, type));
+
+                const userID = "id"+userType.charAt(0).toUpperCase()+userType.substring(1).toLowerCase();
+                const jwt = jwtManager.createJwt(result[0][userID], login, password, type);
+
+                res.status(200).json({
+                    "id":result[0][userID],
+                    "type":type,
+                    "jwt":jwt
+                });
             }
         }
     });
+
+    console.log("FUNCTION CALL : [GET] - Login: '"+login+"'   type: "+userType);
 });
 
 module.exports = router;

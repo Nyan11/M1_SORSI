@@ -3,11 +3,11 @@ const router = require('express').Router();
 
 router.post('/composantes', function (req, res) {
 
-    const { idGestionnaire, nomComposante, idComposante } = req.body;
+    const { idResponsable, nomComposante, idComposante } = req.body;
 
-    let sql = "UPDATE COMPOSANTE SET idGestionnaire=?,nomComposante=? WHERE idComposante=?";
+    let sql = "UPDATE COMPOSANTE SET idResponsable=?,nomComposante=? WHERE idComposante=?";
 
-    connexion.query(sql, [idGestionnaire, nomComposante, idComposante], function (err, data, fields) {
+    connexion.query(sql, [idResponsable, nomComposante, idComposante], function (err, data, fields) {
 
         if (err) return err
         if (data.affectedRows === 0) {

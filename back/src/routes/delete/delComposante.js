@@ -3,33 +3,48 @@ const router = require('express').Router();
 
 router.delete('/composantes', (req, res) => {
 
-    let id_cours = req.body.id;
-    if (!id_cours) {
+    let id_composante = req.body.idComposante;
+    if (!id_composante) {
         return res.status(400).json({
             error: true,
-            message:  "Merci de spécifier l'id du cours à supprimer"
+            message:  "Merci de spécifier l'id de la composante à supprimer"
         });
     }
 
-    let SQLRequest = "DELETE FROM COMPOSANTE WHERE id = ?";
-    connexion.query(SQLRequest,[id_cours] , (error , result) => {
+    //Vérification que la composante ne sois pas lier à une filière
+    const SQLRequest = "SELECT * FROM COMPOSANTE INNER JOIN FILIERE_LANGUE ON COMPOSANTE.idComposante = FILIERE_LANGUE.idComposante AND COMPOSANTE.idComposante = ?";
+    connexion.query(SQLRequest,[id_composante],async (error, result) => {
 
         if(error) throw error;
-
-        if (result.affectedRows > 0) {
+        if (result.length > 0) {
             res.status(200).json({
-                error: false,
-                message: "Cours supprimé avec succès"
+                "error":true,
+                "message":"Impossible de supprimer la composante car elle est lié a une filière langue !"
             });
         }
         else {
-            res.status(404).json({
-                error: true,
-                message: "Aucun cours avec cette id trouvé !"
-            });
 
+            //Suppression de la composante
+            const SQLRequest = "DELETE FROM COMPOSANTE WHERE idComposante = ?";
+            await connexion.query(SQLRequest, [id_composante], async (error, result) => {
+
+                if (error) throw error;
+
+                if (result.affectedRows > 0) {
+                    res.status(200).json({
+                        error: false,
+                        message: "La composante à bien été supprimé !"
+                    });
+                    console.log("FUNCTION CALL : [DELETE] - Suppression d'une composante avec l'id " + id_composante);
+                } else {
+                    res.status(404).json({
+                        error: true,
+                        message: "Aucune composante avec cette id trouvé !"
+                    });
+
+                }
+            });
         }
-        console.log("FUNCTION CALL : [DELETE] - Suppression d'un cours");
     });
 });
 

@@ -11,8 +11,8 @@ router.delete('/gestionnaires', (req, res) => {
         });
     }
 
-    let SQLRequest = "DELETE FROM GESTIONNAIRE WHERE login = ?";
-    connexion.query(SQLRequest,[login_gestionnaire] , (error , result) => {
+    const SQLRequest = "DELETE FROM GESTIONNAIRE WHERE login = ?";
+    connexion.query(SQLRequest,[login_gestionnaire] , async (error , result) => {
 
         if(error) throw error;
 
