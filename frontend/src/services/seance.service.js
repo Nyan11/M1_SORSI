@@ -2,34 +2,26 @@ import headers from './headers.service'
 
 const axios = require('axios')
 
-const API_URL_SEANC_INTERVENANTS = "http://localhost:8080/getSeanceIntervenants";
+const API_URL_SEANCES = "http://localhost:8080/seances";
+const API_URL_SEANCE_INTERVENANTS = "http://localhost:8080/getSeanceIntervenants";
 const API_URL_INTERVENANTS = "http://localhost:8080/intervenants";
 class SeanceService {
-  /* Gestionnaire */
+  /* Séances */
+  getSeances() {
+    return axios.get(API_URL_SEANCES, headers())
+  }
+  /* Séances intervenants */
   getSeance(id) {
-    return axios.get(API_URL_SEANC_INTERVENANTS + "?idIntervenant=" + id, headers())
+    return axios.get(API_URL_SEANCE_INTERVENANTS + "?idIntervenant=" + id, headers())
   }
   updateSeance(user) {
-    return axios.post(API_URL_SEANC_INTERVENANTS, user, headers())
+    return axios.post(API_URL_SEANCE_INTERVENANTS, user, headers())
   }
   createSeance(user) {
-    return axios.put(API_URL_SEANC_INTERVENANTS, user, headers())
+    return axios.put(API_URL_SEANCE_INTERVENANTS, user, headers())
   }
   deleteSeance(user) {
-    return axios.delete(API_URL_SEANC_INTERVENANTS, {data: user}, headers())
-  }
-  /* Intervenant */
-  getIntervenants() {
-    return axios.get(API_URL_INTERVENANTS, headers())
-  }
-  updateIntervenant(user) {
-    return axios.post(API_URL_INTERVENANTS, user, headers())
-  }
-  createIntervenant(user) {
-    return axios.put(API_URL_INTERVENANTS, user, headers())
-  }
-  deleteIntervenant(user) {
-    return axios.delete(API_URL_INTERVENANTS, {data: user}, headers())
+    return axios.delete(API_URL_SEANCE_INTERVENANTS, {data: user}, headers())
   }
 }
 export default new SeanceService();

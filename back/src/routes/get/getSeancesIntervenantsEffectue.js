@@ -10,7 +10,7 @@ router.get('/getSeanceIntervenantsEffectue', (req, res) => {
         "JOIN INTERVENANT ON INTERVENANT.idIntervenant = SEANCE_FORMATION.idIntervenant " +
         "JOIN CRENEAU ON CRENEAU.idCreneau = SEANCE_FORMATION.idCreneau " +
         "JOIN COURS ON COURS.idCours = CRENEAU.idCours " +
-        "WHERE SEANCE_FORMATION.idIntervenant = 18 AND estEffectue = 1 ORDER BY COURS.intitule";
+        "WHERE SEANCE_FORMATION.idIntervenant = ? AND estEffectue = 1 ORDER BY COURS.intitule";
     connexion.query(sql, [idIntervenant], function (err, data) {
 
         if (err) {

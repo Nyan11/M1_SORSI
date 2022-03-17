@@ -18,7 +18,6 @@ async function supprimer(item) {
   Service.deleteCours(item)
 }
 async function ajouter(item) {
-
   Service.createCours(item.cours.intitule, item.concerne, item.participe)
 }
 async function updateView() {
@@ -116,7 +115,7 @@ export default class Cours extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    window.location.reload(false)
+    //window.location.reload(false)
   }
   triggerShowSupprimer(cours) {
     this.setState((state) => {

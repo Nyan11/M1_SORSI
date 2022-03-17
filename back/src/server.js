@@ -43,6 +43,7 @@ app.put('/filiereslangue', require('./routes/put/putFiliereLangue'));
 app.post('/filiereslangue', require('./routes/post/postFiliereLangue'));
 app.delete('/filiereslangue', require('./routes/delete/delFiliereLangue'));
 
+app.get('/seances', require('./routes/get/getSeance'));
 app.get('/getSeanceIntervenants', require('./routes/get/getSeancesIntervenants'));
 
 app.post('/login', require('./routes/connexion/checkUserConnexion'));

@@ -4,39 +4,6 @@ import FormCreneau from './FormCreneau'
 import Service from '../../services/seance.service'
 
 
-const creneaux = [
-  {
-    intitule: "Conseil de département Salle TPI pôle numérique",
-    date: "10/03/22",
-    heureDebut: "12h45",
-    heureFin: "14h45",
-    type: "CM",
-    salle: "Micro 2.6",
-    validation: 2,
-    commentaire: "Bonjour, commentaire 1.",
-  },
-  {
-    intitule: "Algorithmique et programmation",
-    date: "10/03/22",
-    heureDebut: "12h45",
-    heureFin: "14h45",
-    type: "CM",
-    salle: "Micro 2.6",
-    validation: 1,
-    commentaire: "Bonjour, commentaire 2.",
-  },
-  {
-    intitule: "Algorithmique et programmation",
-    date: "10/03/22",
-    heureDebut: "12h45",
-    heureFin: "14h45",
-    type: "CM",
-    salle: "Micro 2.6",
-    validation: 0,
-    commentaire: "Bonjour, commentaire 3.",
-  }
-]
-
 async function modifier(itemNew, itemOld) {
   Service.getSeance(itemNew).then(data => data.data)
 }
@@ -47,17 +14,18 @@ async function ajouter(item) {
   Service.getSeance(item).then(data => data.data)
 }
 async function updateView() {
-  return Service.getSeance(18).then(data => data.data)
+  return Service.getSeances().then(data => data.data)
 }
 
 export default class Cours extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      creneaux: creneaux,
+      creneaux: null,
       showAjouter: false,
       showSupprimer: false,
       showModifier: false,
+      showInformation: false,
       actionAjouter: ajouter,
       actionSupprimer: supprimer,
       actionModifier: modifier,
@@ -73,11 +41,6 @@ export default class Cours extends Component {
         })
       }
     )
-  }
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel();
-    }
   }
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
@@ -121,6 +84,16 @@ export default class Cours extends Component {
       return {...this.state, showSupprimer: false}
     })
   }
+  triggerShowInformation(creneau) {
+    this.setState((state) => {
+      return {...this.state, showInformation: true, selected: creneau}
+    })
+  }
+  triggerHideInformation() {
+    this.setState((state) => {
+      return {...this.state, showInformation: false}
+    })
+  }
   render() {
     if (this.state.creneaux === null) {
       return (<div>
@@ -133,6 +106,7 @@ export default class Cours extends Component {
         <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
         <TableCreneaux
           creneaux={ this.state.creneaux }
+          triggerInformation={ this.triggerShowInformation.bind(this) }
           triggerModifier={ this.triggerShowModifier.bind(this) }
           triggerSupprimer={ this.triggerShowSupprimer.bind(this) }
         />
@@ -151,6 +125,23 @@ export default class Cours extends Component {
               <h3>Confirmer la suppression de { this.state.selected.intitule }</h3>
               <button class="button-confirm" onClick={ this.triggerSupprimer.bind(this) }>Confirmer</button>
               <button class="button-cancel" onClick={ this.triggerHideSupprimer.bind(this) }>Annuler</button>
+            </div>
+          </div>
+        }
+        {this.state.showInformation &&
+          <div class="dialog-overlay">
+            <div class="dialog">
+              <h3>Infomation sur { this.state.selected.intitule }</h3>
+              <div>
+                <span>realiser par : {this.state.selected.nomUsuel}</span>
+              </div>
+              <div>
+                <span>commentaires</span>
+                <p>
+                  {this.state.selected.commentaire}
+                </p>
+              </div>
+              <button class="button-cancel" onClick={ this.triggerHideInformation.bind(this) }>Fermer</button>
             </div>
           </div>
         }

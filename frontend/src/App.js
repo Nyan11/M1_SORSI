@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import './App.css'
 import Administration from './administration/HomeAdministration'
 import Gestionnaire from './gestionnaire/HomeGestionnaire'
+import Responsable from './responsable/HomeResponsable'
 import Intervenant from './intervenant/HomeIntervenant'
 import Login from './other/Login'
 import NavBar from './other/NavBar'
@@ -28,6 +29,10 @@ function App() {
           <Route
             path="gestionnaire/*"
             element={<Gestionnaire />}
+          />
+          <Route
+            path="responsable/*"
+            element={<Responsable />}
           />
           <Route
             path="intervenant/*"
@@ -58,6 +63,7 @@ function Home() {
         <p>{localStorage.getItem('category')}</p>
         <button onClick={()=>{debugLog(true, "administrateur")}}>Log as user admin</button>
         <button onClick={()=>{debugLog(true, "gestionnaire")}}>Log as user gestionnaire</button>
+        <button onClick={()=>{debugLog(true, "responsable")}}>Log as user responsable</button>
         <button onClick={()=>{debugLog(true, "intervenant")}}>Log as user intervenant</button>
         <button onClick={()=>{debugLog(false, "")}}>Remove user</button>
       </div>
@@ -68,6 +74,7 @@ function Home() {
         <h2>Home</h2>
         <button onClick={()=>{debugLog(true, "administrateur")}}>Log as user admin</button>
         <button onClick={()=>{debugLog(true, "gestionnaire")}}>Log as user gestionnaire</button>
+        <button onClick={()=>{debugLog(true, "responsable")}}>Log as user responsable</button>
         <button onClick={()=>{debugLog(true, "intervenant")}}>Log as user intervenant</button>
         <button onClick={()=>{debugLog(false, "")}}>Remove user</button>
       </div>

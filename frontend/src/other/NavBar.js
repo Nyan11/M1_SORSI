@@ -15,6 +15,8 @@ function loadFirstColor(path) {
     setColor("#04aa6d")
   } else if (path === "gestionnaire") {
     setColor("#ff6347")
+  } else if (path === "responsable") {
+    setColor("#a19932")
   } else if (path === "intervenant") {
     setColor("#3b48b1")
   } else {
@@ -46,6 +48,10 @@ export default class NavBar extends Component {
     setColor("#ff6347")
     this.setState({selected: "gestionnaire"})
   }
+  changeLinkResp() {
+    setColor("#a19932")
+    this.setState({selected: "responsable"})
+  }
   changeLinkInt() {
     setColor("#3b48b1")
     this.setState({selected: "intervenant"})
@@ -69,6 +75,9 @@ export default class NavBar extends Component {
           </li>
           <li>
             <Link class={this.state.selected === "gestionnaire" ? "navbar-link-selected" : "navbar-link"} onClick={this.changeLinkGest.bind(this)} to="/gestionnaire">Gestionnaire</Link>
+          </li>
+          <li>
+            <Link class={this.state.selected === "responsable" ? "navbar-link-selected" : "navbar-link"} onClick={this.changeLinkResp.bind(this)} to="/responsable">Responsable</Link>
           </li>
           <li>
             <Link class={this.state.selected === "intervenant" ? "navbar-link-selected" : "navbar-link"} onClick={this.changeLinkInt.bind(this)} to="/intervenant">Intervenant</Link>
