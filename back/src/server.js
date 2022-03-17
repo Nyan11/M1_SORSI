@@ -23,10 +23,10 @@ app.put('/gestionnaires', require('./routes/put/putGestionnaire'));
 app.post('/gestionnaires', require('./routes/post/postGestionnaire'));
 app.delete('/gestionnaires', require('./routes/delete/delGestionnaire'));
 
-app.get('/reponsables', require('./routes/get/getResponsable'));
-app.put('/reponsables', require('./routes/put/putResponsable'));
-app.post('/reponsables', require('./routes/post/postResponsable'));
-app.delete('/reponsables', require('./routes/delete/delResponsable'));
+app.get('/responsables', require('./routes/get/getResponsable'));
+app.put('/responsables', require('./routes/put/putResponsable'));
+app.post('/responsables', require('./routes/post/postResponsable'));
+app.delete('/responsables', require('./routes/delete/delResponsable'));
 
 app.get('/cours', require('./routes/get/getCours'));
 app.put('/cours', require('./routes/put/putCours'));

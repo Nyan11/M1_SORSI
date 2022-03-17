@@ -17,7 +17,7 @@ async function updateView() {
   return AdministrationService.getGestionnaires().then(data => data.data)
 }
 
-export default class ListUsers extends Component {
+export default class Gestionnaires extends Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -5,19 +5,19 @@ import AdministrationService from '../services/administration.service'
 
 
 async function modifier(userNew, userOld) {
-  AdministrationService.updateIntervenant(userNew).then(data => data.data)
+  AdministrationService.updateResponsable(userNew).then(data => data.data)
 }
 async function supprimer(user) {
-  AdministrationService.deleteIntervenant(user).then(data => data.data)
+  AdministrationService.deleteResponsable(user).then(data => data.data)
 }
 async function ajouter(user) {
-  AdministrationService.createIntervenant(user).then(data => data.data)
+  AdministrationService.createResponsable(user).then(data => data.data)
 }
 async function updateView() {
-  return AdministrationService.getIntervenants().then(data => data.data)
+  return AdministrationService.getResponsables().then(data => data.data)
 }
 
-export default class Intervenants extends Component {
+export default class Responsables extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -85,12 +85,12 @@ export default class Intervenants extends Component {
   render() {
     if (this.state.users === null) {
       return <div>
-        <h3>Liste des intervenants</h3>
+        <h3>Liste des responsables</h3>
         Loading ...
       </div>;
     } else {
       return <div>
-        <h3>Liste des intervenants</h3>
+        <h3>Liste des responsables</h3>
         <button class="button-confirm" onClick={ this.triggerShowAjouter.bind(this) }>Ajouter</button>
         <TableUsers
           users={ this.state.users }

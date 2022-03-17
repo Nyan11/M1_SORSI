@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom"
 import Gestionnaires from './Gestionnaires'
+import Responsables from './Responsables'
 import Intervenants from './Intervenants'
 import Login from '../other/Login'
 import Auth from '../services/auth.service'
@@ -21,6 +22,9 @@ class NavBarAdministration extends Component {
   }
   changeLinkGestionnaire() {
     this.setState({selected: "/gestionnaire"})
+  }
+  changeLinkResponsable() {
+    this.setState({selected: "/responsable"})
   }
   changeLinkIntervenant() {
     this.setState({selected: "/intervenant"})
@@ -43,6 +47,14 @@ class NavBarAdministration extends Component {
               onClick={this.changeLinkLogin.bind(this)}
               to="/administration/login"
             >Login
+            </Link>
+          </li>
+          <li>
+            <Link
+              class={this.state.selected === "/responsable" ? "navbar-link-selected" : "navbar-link"}
+              onClick={this.changeLinkResponsable.bind(this)}
+              to="/administration/responsable"
+            >Responsable
             </Link>
           </li>
           <li>
@@ -74,6 +86,7 @@ function Home() {
       <h3>Section Administration</h3>
       <div class="container">
         <Gestionnaires />
+        <Responsables />
         <Intervenants />
       </div>
     </div>
@@ -89,6 +102,7 @@ export default class HomeAdministration extends Component {
             <Route index element={<Home />} />
             <Route path="login" element={<Login category="administration" />} />
             <Route path="gestionnaire" element={<Gestionnaires />} />
+            <Route path="responsable" element={<Responsables />} />
             <Route path="intervenant" element={<Intervenants />} />
             <Route path="*" element={<NoMatch path="/administration"/>} />
           </Route>

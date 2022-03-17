@@ -3,6 +3,7 @@ import headers from './headers.service'
 const axios = require('axios')
 
 const API_URL_GESTIONNAIRES = "http://localhost:8080/gestionnaires";
+const API_URL_RESPONSABLES = "http://localhost:8080/responsables";
 const API_URL_INTERVENANTS = "http://localhost:8080/intervenants";
 class AdministrationService {
   /* Gestionnaire */
@@ -17,6 +18,19 @@ class AdministrationService {
   }
   deleteGestionnaire(user) {
     return axios.delete(API_URL_GESTIONNAIRES, {data: user}, headers())
+  }
+  /* Responsable */
+  getResponsables() {
+    return axios.get(API_URL_RESPONSABLES, headers())
+  }
+  updateResponsable(user) {
+    return axios.post(API_URL_RESPONSABLES, user, headers())
+  }
+  createResponsable(user) {
+    return axios.put(API_URL_RESPONSABLES, user, headers())
+  }
+  deleteResponsable(user) {
+    return axios.delete(API_URL_RESPONSABLES, {data: user}, headers())
   }
   /* Intervenant */
   getIntervenants() {
