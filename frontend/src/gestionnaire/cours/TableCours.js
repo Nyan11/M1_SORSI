@@ -15,6 +15,8 @@ export default class TableCours extends Component {
         <thead>
           <tr>
             <td>intitule</td>
+            <td>filieres</td>
+            <td>intervenants</td>
             <td>supprimer</td>
             <td>modifier</td>
           </tr>
@@ -53,6 +55,8 @@ class RowTableCours extends Component {
     return(
       <tr>
         <td>{ this.state.cours.intitule }</td>
+        <td>{ this.state.cours.filiereLangue.reduce((acc, filiere) => { return acc ? (acc + " " + filiere.codeFiliereLangue) : (filiere.codeFiliereLangue) }, "") }</td>
+        <td>{ this.state.cours.intervenants.reduce((acc, inter) => { return acc ? (acc + " " + inter.nomUsuel) : (inter.nomUsuel) }, "") }</td>
         <td><button onClick={ this.handleSupprimerClicked.bind(this) }>supprimer</button></td>
         <td><button onClick={ this.handleModifierClicked.bind(this) }>modifier</button></td>
       </tr>

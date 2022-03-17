@@ -38,13 +38,13 @@ const creneaux = [
 ]
 
 async function modifier(itemNew, itemOld) {
-  return Service.updateCours(itemNew).then(data => data.data)
+  Service.updateCours(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  return Service.deleteCours(item).then(data => data.data)
+  Service.deleteCours(item).then(data => data.data)
 }
 async function ajouter(item) {
-  return Service.createCours(item).then(data => data.data)
+  Service.createCours(item).then(data => data.data)
 }
 async function updateView() {
   return Service.createCours(null).then(data => data.data)

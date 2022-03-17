@@ -2,19 +2,45 @@ import React, { Component } from 'react'
 import TableCours from './TableCours'
 import FormCours from './FormCours'
 import Service from '../../services/gestionnaire.service'
+import Admin from '../../services/administration.service'
 
 
+async function getFilieres() {
+  return Service.getFilieres().then(data => data.data)
+}
+async function getIntervenants() {
+  return Admin.getIntervenants().then(data => data.data)
+}
 async function modifier(itemNew, itemOld) {
-  return Service.updateCours(itemNew).then(data => data.data)
+  Service.updateCours(itemNew.cours, itemNew.concerne, itemNew.participe)
 }
 async function supprimer(item) {
-  return Service.deleteCours(item).then(data => data.data)
+  Service.deleteCours(item)
 }
 async function ajouter(item) {
-  return Service.createCours(item).then(data => data.data)
+
+  Service.createCours(item.cours.intitule, item.concerne, item.participe)
 }
 async function updateView() {
-  return Service.getCours().then(data => data.data)
+  return Service.getCours().then(res => {
+    var data = res.data
+    return data.reduce((previousValue, currentValue) => {
+      var value = previousValue.find((item) => {return item.id === currentValue.id})
+      var filiere = {idFiliereLangue: currentValue.idFiliereLangue, codeFiliereLangue: currentValue.codeFiliereLangue }
+      var intervenant = {idIntervenant: currentValue.idIntervenant, nomUsuel: currentValue.nomUsuel, prenom: currentValue.prenom }
+      if (value) {
+        if (!value.filiereLangue.find(item => item.idFiliereLangue === filiere.idFiliereLangue)) {
+          value.filiereLangue.push(filiere)
+        }
+        if (!value.intervenants.find(item => item.idIntervenant === intervenant.idIntervenant)) {
+          value.intervenants.push(intervenant)
+        }
+      } else {
+        previousValue.push({id: currentValue.id, intitule: currentValue.intitule, filiereLangue:[filiere], intervenants: [intervenant]})
+      }
+      return previousValue
+    }, [])
+  })
 }
 
 export default class Cours extends Component {
@@ -29,14 +55,33 @@ export default class Cours extends Component {
       actionSupprimer: supprimer,
       actionModifier: modifier,
       selected: {},
+      filieres: [],
+      intervenants: [],
+      ready: 0,
     }
   }
   componentDidMount() {
-    this._asyncRequest = updateView().then(
+    this._asyncRequestCours = updateView().then(
       liste => {
-        this._asyncRequest = null
+        this._asyncRequestCours = null
         this.setState((state) => {
-          return {...state, cours: liste}
+          return {...state, cours: liste, ready: this.state.ready + 1}
+        })
+      }
+    )
+    this._asyncRequestFilieres = getFilieres().then(
+      liste => {
+        this._asyncRequestFiieres = null
+        this.setState((state) => {
+          return {...state, filieres: liste, ready: this.state.ready + 1}
+        })
+      }
+    )
+    this._asyncRequestIntervenants = getIntervenants().then(
+      liste => {
+        this._asyncRequestIntervenants = null
+        this.setState((state) => {
+          return {...state, intervenants: liste, ready: this.state.ready + 1}
         })
       }
     )
@@ -84,7 +129,7 @@ export default class Cours extends Component {
     })
   }
   render() {
-    if (this.state.cours === null) {
+    if (this.state.ready !== 3 || !this.state.filieres || !this.state.intervenants) {
       return (<div>
         <h3>Liste des cours</h3>
         Loading ...
@@ -102,7 +147,7 @@ export default class Cours extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Ajouter un cours</h3>
-              <FormCours trigger={  this.triggerAjouter.bind(this) }/>
+              <FormCours trigger={this.triggerAjouter.bind(this)} filieres={this.state.filieres} intervenants={this.state.intervenants} />
               <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
             </div>
           </div>
@@ -120,7 +165,7 @@ export default class Cours extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Modification de { this.state.selected.intitule }</h3>
-              <FormCours cours={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+              <FormCours cours={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"  filieres={ this.state.filieres } intervenants={this.state.intervenants} />
               <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
             </div>
           </div>
