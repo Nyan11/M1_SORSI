@@ -8,8 +8,6 @@ router.post('/login',(req, res) => {
     const password = req.body.password;
     const type = req.body.type;
 
-    console.log(req.body)
-
     if (!login) {
         res.status(400).json({
             error: true,

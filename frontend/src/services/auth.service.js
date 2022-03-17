@@ -32,16 +32,14 @@ class AuthService {
     return JSON.parse(localStorage.getItem('token'));;
   }
   isLogAsAdmin() {
-    return localStorage.getItem("isLog") && localStorage.getItem("category") === "administration"
+    return true
+    //return localStorage.getItem("isLog") && localStorage.getItem("category") === "administration"
   }
   isLogAsGestionnaire() {
     return localStorage.getItem("isLog") && localStorage.getItem("category") === "gestionnaire"
   }
   isLogAsIntervenant() {
     return localStorage.getItem("isLog") && localStorage.getItem("category") === "intervenant"
-  }
-  debugLocal() {
-    localStorage.setItem("token", JSON.stringify({accessToken: 'abcdef123'}))
   }
 }
 export default new AuthService();

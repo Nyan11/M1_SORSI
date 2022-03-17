@@ -21,8 +21,7 @@ exports.verifyToken = function (req, res, next) {
     }
 
     try {
-        req.token = jwt.verify(token, jwtConfig.PRIVATE_KET);
-        this.getJtw(token);
+        jwt.verify(token, jwtConfig.PRIVATE_KET);
         next();
     }
     catch (e) {
@@ -35,4 +34,12 @@ exports.getJtw = function (token) {
     const decode = jwt.decode(token);
     console.log(decode);
     return decode;
+}
+
+
+exports.checkPermission = function (wantedPermission, token) {
+
+    const tokenPermission = token.type;
+    return tokenPermission <= wantedPermission;
+
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Routes, Route, Outlet, Link } from "react-router-dom"
-import Gestionnaire from './Gestionnaire'
-import Intervenant from './Intervenant'
+import Gestionnaires from './Gestionnaires'
+import Intervenants from './Intervenants'
 import Login from '../other/Login'
 import Auth from '../services/auth.service'
 import NoMatch from '../other/NoMatch'
@@ -73,8 +73,8 @@ function Home() {
     <div>
       <h3>Section Administration</h3>
       <div class="container">
-        <Gestionnaire />
-        <Intervenant />
+        <Gestionnaires />
+        <Intervenants />
       </div>
     </div>
   );
@@ -88,8 +88,8 @@ export default class HomeAdministration extends Component {
           <Route path="/" element={<NavBarAdministration />}>
             <Route index element={<Home />} />
             <Route path="login" element={<Login category="administration" />} />
-            <Route path="gestionnaire" element={<Gestionnaire />} />
-            <Route path="intervenant" element={<Intervenant />} />
+            <Route path="gestionnaire" element={<Gestionnaires />} />
+            <Route path="intervenant" element={<Intervenants />} />
             <Route path="*" element={<NoMatch path="/administration"/>} />
           </Route>
         </Routes>
