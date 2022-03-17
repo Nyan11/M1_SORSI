@@ -14,7 +14,7 @@ export default class FormCours extends Component {
     }
     if (props.cours) {
       this.state.cours = {
-        id: props.cours.id,
+        idCours: props.cours.idCours,
         intitule: props.cours.intitule,
       }
       this.state.checkboxFilieres = props.cours.filiereLangue.reduce((acc, item) => {
@@ -97,7 +97,7 @@ export default class FormCours extends Component {
         {this.state.intervenants.map((intervenant, index) =>
           <CheckCours
             label={intervenant.nomUsuel + " " + intervenant.prenom}
-            value={intervenant.id}
+            value={intervenant.idIntervenant}
             selected={this.state.checkboxIntervenants}
             key={index}
             updateArray={this.updateArrayIntervenants.bind(this)}

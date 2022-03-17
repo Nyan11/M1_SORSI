@@ -12,13 +12,17 @@ async function getIntervenants() {
   return Admin.getIntervenants().then(data => data.data)
 }
 async function modifier(itemNew, itemOld) {
-  Service.updateCours(itemNew.cours, itemNew.concerne, itemNew.participe)
+  const concerne = itemNew.concerne.filter(obj => obj !== null)
+  const participe = itemNew.participe.filter(obj => obj !== null)
+  Service.updateCours(itemNew.cours, concerne, participe)
 }
 async function supprimer(item) {
   Service.deleteCours(item)
 }
 async function ajouter(item) {
-  Service.createCours(item.cours.intitule, item.concerne, item.participe)
+  const concerne = item.concerne.filter(obj => obj !== null)
+  const participe = item.participe.filter(obj => obj !== null)
+  Service.createCours(item.cours.intitule, concerne, participe)
 }
 async function updateView() {
   return Service.getCours().then(res => {
@@ -115,7 +119,7 @@ export default class Cours extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    //window.location.reload(false)
+    window.location.reload(false)
   }
   triggerShowSupprimer(cours) {
     this.setState((state) => {

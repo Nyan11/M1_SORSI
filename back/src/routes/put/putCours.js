@@ -4,13 +4,23 @@ const router = require('express').Router();
 router.put('/cours', function (req, res) {
 
     const { intitule } = req.body;
+    console.log(intitule)
 
     let sql = "INSERT INTO COURS(intitule) VALUES (?)";
     connexion.query(sql, [intitule], function (err, data, fields) {
-        sql = "SELECT MAX(id) as 'id' FROM COURS";
+        if (err) {
+          res.status(500).json({err: err});
+          return;
+        }
+        sql = "SELECT MAX(idCours) as 'idCours' FROM COURS";
         connexion.query(sql, function (err, data, fields) {
-            let idCours  = data[0].id;
-            res.status(200).json({id: idCours});
+            if (err) {
+              res.status(500).json({err: err});
+              return;
+            }
+            console.log(data)
+            let idCours  = data[0].idCours;
+            res.status(200).json({idCours: idCours});
           });
     });
 });
