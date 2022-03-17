@@ -84,7 +84,7 @@ export default class Filieres extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    //window.location.reload(false)
+    window.location.reload(false)
   }
   triggerShowSupprimer(filiere) {
     this.setState((state) => {
