@@ -25,7 +25,7 @@ async function updateView() {
   return Service.getCours().then(res => {
     var data = res.data
     return data.reduce((previousValue, currentValue) => {
-      var value = previousValue.find((item) => {return item.id === currentValue.id})
+      var value = previousValue.find((item) => {return item.idCours === currentValue.idCours})
       var filiere = {idFiliereLangue: currentValue.idFiliereLangue, codeFiliereLangue: currentValue.codeFiliereLangue }
       var intervenant = {idIntervenant: currentValue.idIntervenant, nomUsuel: currentValue.nomUsuel, prenom: currentValue.prenom }
       if (value) {
@@ -36,7 +36,7 @@ async function updateView() {
           value.intervenants.push(intervenant)
         }
       } else {
-        previousValue.push({id: currentValue.id, intitule: currentValue.intitule, filiereLangue:[filiere], intervenants: [intervenant]})
+        previousValue.push({idCours: currentValue.idCours, intitule: currentValue.intitule, filiereLangue:[filiere], intervenants: [intervenant]})
       }
       return previousValue
     }, [])

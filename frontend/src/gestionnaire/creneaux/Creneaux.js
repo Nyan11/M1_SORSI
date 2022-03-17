@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TableCreneaux from './TableCreneaux'
 import FormCreneau from './FormCreneau'
-import Service from '../../services/gestionnaire.service'
+import Service from '../../services/seance.service'
 
 
 const creneaux = [
@@ -38,16 +38,16 @@ const creneaux = [
 ]
 
 async function modifier(itemNew, itemOld) {
-  Service.updateCours(itemNew).then(data => data.data)
+  Service.getSeance(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  Service.deleteCours(item).then(data => data.data)
+  Service.getSeance(item).then(data => data.data)
 }
 async function ajouter(item) {
-  Service.createCours(item).then(data => data.data)
+  Service.getSeance(item).then(data => data.data)
 }
 async function updateView() {
-  return Service.createCours(null).then(data => data.data)
+  return Service.getSeance(18).then(data => data.data)
 }
 
 export default class Cours extends Component {
@@ -64,7 +64,6 @@ export default class Cours extends Component {
       selected: {},
     }
   }
-  /*
   componentDidMount() {
     this._asyncRequest = updateView().then(
       liste => {
@@ -80,7 +79,6 @@ export default class Cours extends Component {
       this._asyncRequest.cancel();
     }
   }
-  */
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
     window.location.reload(false)

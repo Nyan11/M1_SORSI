@@ -16,14 +16,14 @@ router.get('/cours', (req, res) => {
 */
     const SQLRequest =
       "SELECT " +
-      "COURS.id, COURS.intitule, " +
+      "COURS.idCours, COURS.intitule, " +
       "FILIERE_LANGUE.idFiliereLangue, FILIERE_LANGUE.codeFiliereLangue, " +
       "INTERVENANT.nomUsuel, INTERVENANT.prenom, PARTICIPE_A.idIntervenant " +
       "FROM COURS " +
-      "LEFT JOIN CONCERNE ON COURS.id = CONCERNE.idCours " +
+      "LEFT JOIN CONCERNE ON COURS.idCours = CONCERNE.idCours " +
       "LEFT JOIN FILIERE_LANGUE ON FILIERE_LANGUE.idFiliereLangue = CONCERNE.idFiliereLangue " +
-      "LEFT JOIN PARTICIPE_A ON COURS.id = PARTICIPE_A.idCours " +
-      "LEFT JOIN INTERVENANT ON INTERVENANT.id = PARTICIPE_A.idIntervenant"
+      "LEFT JOIN PARTICIPE_A ON COURS.idCours = PARTICIPE_A.idCours " +
+      "LEFT JOIN INTERVENANT ON INTERVENANT.idIntervenant = PARTICIPE_A.idIntervenant"
     connexion.query(SQLRequest, function (err, data) {
 
         if (err) {

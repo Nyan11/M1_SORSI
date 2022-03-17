@@ -9,7 +9,6 @@ import NoMatch from './other/NoMatch'
 import Auth from './services/auth.service'
 
 function App() {
-  Auth.debugLocal()
   return (
     <div className="App">
       <Routes>

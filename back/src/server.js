@@ -23,6 +23,11 @@ app.put('/gestionnaires', require('./routes/put/putGestionnaire'));
 app.post('/gestionnaires', require('./routes/post/postGestionnaire'));
 app.delete('/gestionnaires', require('./routes/delete/delGestionnaire'));
 
+app.get('/responsables', require('./routes/get/getResponsable'));
+app.put('/responsables', require('./routes/put/putResponsable'));
+app.post('/responsables', require('./routes/post/postResponsable'));
+app.delete('/responsables', require('./routes/delete/delResponsable'));
+
 app.get('/cours', require('./routes/get/getCours'));
 app.put('/cours', require('./routes/put/putCours'));
 app.post('/cours', require('./routes/post/postCours'));
@@ -38,6 +43,9 @@ app.put('/filiereslangue', require('./routes/put/putFiliereLangue'));
 app.post('/filiereslangue', require('./routes/post/postFiliereLangue'));
 app.delete('/filiereslangue', require('./routes/delete/delFiliereLangue'));
 
+app.get('/getSeanceIntervenants', require('./routes/get/getSeancesIntervenants'));
+
+app.post('/login', require('./routes/connexion/checkUserConnexion'));
 app.post('/concerne', require('./routes/post/postConcerne'));
 app.post('/participe', require('./routes/post/postParticipe'));
 
