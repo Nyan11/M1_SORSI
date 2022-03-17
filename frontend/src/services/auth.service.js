@@ -22,13 +22,20 @@ class AuthService {
     return JSON.parse(localStorage.getItem('token'));;
   }
   isLogAsAdmin() {
-    return localStorage.getItem("isLog") && localStorage.getItem("category") === "administrateur"
+    //return localStorage.getItem("isLog") && localStorage.getItem("category") === "administrateur"
+    return true
   }
   isLogAsGestionnaire() {
-    return localStorage.getItem("isLog") && localStorage.getItem("category") === "gestionnaire"
+    //return localStorage.getItem("isLog") && localStorage.getItem("category") === "gestionnaire"
+    return true
   }
   isLogAsIntervenant() {
-    return localStorage.getItem("isLog") && localStorage.getItem("category") === "intervenant"
+    //return localStorage.getItem("isLog") && localStorage.getItem("category") === "intervenant"
+    return true
+  }
+  isLogAsResponsable() {
+    //return localStorage.getItem("isLog") && localStorage.getItem("category") === "responsable"
+    return true
   }
   debugLocal() {
     localStorage.setItem("token", JSON.stringify({accessToken: 'abcdef123'}))

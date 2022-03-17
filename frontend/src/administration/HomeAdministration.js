@@ -73,8 +73,8 @@ function Home() {
     <div>
       <h3>Section Administration</h3>
       <div class="container">
-        <Gestionnaire />
-        <Intervenant />
+        {/*}<Gestionnaire />
+        <Intervenant />*/}
       </div>
     </div>
   );

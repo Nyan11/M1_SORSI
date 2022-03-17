@@ -38,6 +38,7 @@ app.put('/filiereslangue', require('./routes/put/putFiliereLangue'));
 app.post('/filiereslangue', require('./routes/post/postFiliereLangue'));
 app.delete('/filiereslangue', require('./routes/delete/delFiliereLangue'));
 
+app.post('/login', require('./routes/connexion/checkUserConnexion'));
 app.post('/concerne', require('./routes/post/postConcerne'));
 app.post('/participe', require('./routes/post/postParticipe'));
 
