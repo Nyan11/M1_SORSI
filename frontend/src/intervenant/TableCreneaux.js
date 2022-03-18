@@ -22,7 +22,7 @@ export default class TableCreneaux extends Component {
             <td>date_heure</td>
             <td>dureeEffective</td>
             <td>information</td>
-            <td>validation</td>
+            <td>modification</td>
           </tr>
         </thead>
         <tbody>
@@ -61,15 +61,15 @@ class RowTableCreneau extends Component {
   render() {
     return(
       <tr>
-        <td>{ this.state.creneau.valide }</td>
-        <td>{ this.state.creneau.estEffectue }</td>
-        <td>{ this.state.creneau.intitule }</td>
-        <td>{ this.state.creneau.type }</td>
+        <td>{ this.state.creneau.valide === 1 ? "oui" : "non" }</td>
+        <td>{ this.state.creneau.estEffectue === 1 ? "oui" : "non" }</td>
+        <td>{ this.state.creneau.nomCours }</td>
+        <td>{ this.state.creneau.typeCours }</td>
         <td>{ this.state.creneau.salle }</td>
         <td>{ this.state.creneau.date_heure }</td>
         <td>{ this.state.creneau.dureeEffective }</td>
-        <td><button onClick={ this.handleInformationClicked.bind(this) }>information</button></td>
-        <td><button onClick={ this.handleModifierClicked.bind(this) }>validation</button></td>
+        <td>{ this.state.creneau.commentaire ? (<button onClick={ this.handleInformationClicked.bind(this) }>commentaires</button>) : "" }</td>
+        <td><button onClick={ this.handleModifierClicked.bind(this) }>modifier</button></td>
       </tr>
     )
   }

@@ -1,7 +1,7 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
 
-router.get('/getSeanceEffectuesIntervenantPeriode', (req, res) => {
+router.get('/getSeanceEffectuesIntervenantPeriode', jwtManager.verifyToken, (req, res) => {
 
     const { idIntervenant, annee, mois } = req.query;
 

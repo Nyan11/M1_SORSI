@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TableCreneaux from './TableCreneaux'
+import TableSeances from './TableSeances'
 import FormCreneau from './FormCreneau'
 import Service from '../../services/seance.service'
 import Gest from '../../services/gestionnaire.service'
@@ -17,7 +18,6 @@ async function getCours() {
     }, [])
   })
 }
-
 async function modifier(itemNew, itemOld) {
   Service.postCreneaux(itemNew).then(data => data.data)
 }
@@ -67,7 +67,7 @@ export default class Cours extends Component {
   }
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
-    //window.location.reload(false)
+    window.location.reload(false)
   }
   triggerShowAjouter() {
     this.setState((state) => {
@@ -81,7 +81,7 @@ export default class Cours extends Component {
   }
   triggerModifier(creneau) {
     this.state.actionModifier(creneau, this.state.selected)
-    //window.location.reload(false)
+    window.location.reload(false)
   }
   triggerShowModifier(creneau) {
     this.setState((state) => {
@@ -95,7 +95,7 @@ export default class Cours extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    //window.location.reload(false)
+    window.location.reload(false)
   }
   triggerShowSupprimer(creneau) {
     this.setState((state) => {
@@ -154,16 +154,10 @@ export default class Cours extends Component {
         {this.state.showInformation &&
           <div class="dialog-overlay">
             <div class="dialog">
-              <h3>Infomation sur { this.state.selected.intitule }</h3>
-              <div>
-                <span>realiser par : {this.state.selected.nomUsuel}</span>
-              </div>
-              <div>
-                <span>commentaires</span>
-                <p>
-                  {this.state.selected.commentaire}
-                </p>
-              </div>
+              <h3>Liste des séances</h3>
+              <TableSeances
+                creneau={ this.state.selected }
+              />
               <button class="button-cancel" onClick={ this.triggerHideInformation.bind(this) }>Fermer</button>
             </div>
           </div>

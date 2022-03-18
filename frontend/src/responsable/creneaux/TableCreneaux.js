@@ -13,15 +13,12 @@ export default class TableCreneaux extends Component {
       <table>
         <thead>
           <tr>
-            <td>valide</td>
-            <td>estEffectue</td>
-            <td>intervenant</td>
             <td>intitule</td>
             <td>type</td>
             <td>salle</td>
             <td>date_heure</td>
-            <td>dureeEffective</td>
-            <td>information</td>
+            <td>duree</td>
+            <td>séances</td>
           </tr>
         </thead>
         <tbody>
@@ -52,15 +49,12 @@ class RowTableCreneau extends Component {
   render() {
     return(
       <tr>
-        <td>{ this.state.creneau.valide }</td>
-        <td>{ this.state.creneau.estEffectue }</td>
-        <td>{ this.state.creneau.nomUsuel }</td>
         <td>{ this.state.creneau.intitule }</td>
         <td>{ this.state.creneau.type }</td>
         <td>{ this.state.creneau.salle }</td>
         <td>{ this.state.creneau.date_heure }</td>
-        <td>{ this.state.creneau.dureeEffective }</td>
-        <td><button onClick={ this.handleInformationClicked.bind(this) }>information</button></td>
+        <td>{ this.state.creneau.duree }</td>
+        <td><button onClick={ this.handleInformationClicked.bind(this) }>séances</button></td>
       </tr>
     )
   }

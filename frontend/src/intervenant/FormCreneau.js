@@ -5,6 +5,7 @@ export default class FormCreneau extends Component {
     super(props)
     this.state = {
       creneau: {},
+      creneaux: props.creneaux,
       submitValue: "Ajouter",
       trigger: () => {}
     }
@@ -29,7 +30,7 @@ export default class FormCreneau extends Component {
   }
 
   handleSubmitClicked(event) {
-    var item = this.state.cours
+    var item = this.state.creneau
     event.preventDefault()
     this.state.trigger(item)
   }
@@ -37,12 +38,33 @@ export default class FormCreneau extends Component {
   render() {
     return (
     <form onSubmit={this.handleSubmitClicked.bind(this)}>
+    {this.state.submitValue !== "Ajouter" &&
     <div>
-      <label for="validation">code : </label>
-      <select id="validation" name="validation" value={this.state.creneau.validation} onChange={this.handleInputChanged.bind(this)}>
-        <option value="0">A valider</option>
-        <option value="1">Fait</option>
-        <option value="2">Annule</option>
+      <label for="estEffectue">est effectué : </label>
+      <select id="estEffectue" name="estEffectue" value="0" onChange={this.handleInputChanged.bind(this)}>
+        <option value="0">non</option>
+        <option value="1">oui</option>
+      </select>
+    </div>}
+    <div>
+      <label for="durreEffective">durreEffective : </label>
+      <input
+        type="time"
+        name="durreEffective"
+        id="durreEffective"
+        value={this.state.creneau.durreEffective || ""}
+        onChange={this.handleInputChanged.bind(this)}
+      />
+    </div>
+    <div>
+      <label for="idCreneau">creneaux : </label>
+      <select id="idCreneau" name="idCreneau" value={this.state.creneau.idCreneau} onChange={this.handleInputChanged.bind(this)}>
+        {this.state.creneaux.map((item, index) =>
+          <option
+            key={ index }
+            value={ item.idCreneau }
+          >{item.date_heure + " " + item.type + " " + item.salle}</option>
+        )}
       </select>
     </div>
     <div>

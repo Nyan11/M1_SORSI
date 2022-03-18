@@ -2,7 +2,7 @@ const connexion = require("../../db/sql");
 const router = require('express').Router();
 const jwtManager = require('../../jwt/jwtManager');
 
-router.post('/creneaux', jwtManager.verifyToken, function (req, res) {
+router.post('/seances', jwtManager.verifyToken, function (req, res) {
 
     if (!jwtManager.checkPermission(3, jwtManager.getJtw(req.headers['x-access-token']))) {
         res.status(403).json({
@@ -12,15 +12,19 @@ router.post('/creneaux', jwtManager.verifyToken, function (req, res) {
         return;
     }
 
-    const { idCours, date_heure, duree, type, salle} = req.body;
+    const { idCreneau, commentaire, durreEffective, estEffectue } = req.body;
+    const idIntervenant = jwtManager.getJtw(req.headers['x-access-token']).id
 
-    let sql = "UPDATE CRENEAU SET idCours=?,date_heure=?,duree=?,type=?,salle=? WHERE idCreneau=? ";
+    let sql = "INSERT INTO SEANCE_FORMATION(idIntervenant, idCreneau, estEffectue, dureeEffective, valide, commentaire) VALUES (?, ?, ?, ?, ?, ?)";
 
-    connexion.query(sql, [idCours, date_heure, duree, type, salle, idCreneau], function (err, data, fields) {
+    connexion.query(sql, [idIntervenant, idCreneau, estEffectue, durreEffective, 0, commentaire ], function (err, data, fields) {
 
-        if (err) res.status(500).json(err);
+        if (err) {
+          res.status(500).json(err);
+          return;
+        }
         if (data.affectedRows === 0) {
-            res.status(304).json({status : "echec put Creneau",});
+            res.status(304).json({status : "echec put Seance",});
             return;
         }
         res.status(200).json({});

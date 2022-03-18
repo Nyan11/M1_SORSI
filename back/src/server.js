@@ -38,19 +38,22 @@ app.put('/composantes', require('./routes/put/putComposante'));
 app.post('/composantes', require('./routes/post/postComposante'));
 app.delete('/composantes', require('./routes/delete/delComposante'));
 
+app.get('/creneaux', require('./routes/get/getCreneau'));
+app.put('/creneaux', require('./routes/put/putCreneau'));
+app.post('/creneaux', require('./routes/post/postCreneau'));
+app.delete('/creneaux', require('./routes/delete/delCreneau'));
+
 app.get('/filiereslangue', require('./routes/get/getFiliereLangue'));
 app.put('/filiereslangue', require('./routes/put/putFiliereLangue'));
 app.post('/filiereslangue', require('./routes/post/postFiliereLangue'));
 app.delete('/filiereslangue', require('./routes/delete/delFiliereLangue'));
 
-app.get('/getSeanceIntervenants', require('./routes/get/getSeancesIntervenants'));
-
 app.post('/login', require('./routes/connexion/checkUserConnexion'));
 app.post('/concerne', require('./routes/post/postConcerne'));
 app.post('/participe', require('./routes/post/postParticipe'));
 
-
-app.get('/getSeanceIntervenants', require('./routes/get/getSeancesIntervenants')); //recupere toutes les seances lié a un intervenant
+app.get('/getSeanceFormationByIdCreneau', require('./routes/get/getSeanceFormationByIdCreneau'));
+app.get('/getSeancesIntervenants', require('./routes/get/getSeancesIntervenants')); //recupere toutes les seances lié a un intervenant
 app.get('/getSeanceIntervenantsEffectue', require('./routes/get/getSeancesIntervenantsEffectue')); //heures effectué pour que un gestionnaire valide
 app.get('/getTotalHeuresIntervenants', require('./routes/get/getTotalHeureIntervenant')); //renvoie le total d'heures effectué par un intervenant
 

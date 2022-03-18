@@ -40,17 +40,6 @@ export default class FormCreneau extends Component {
     return (
     <form onSubmit={this.handleSubmitClicked.bind(this)}>
       <div>
-        <label for="intitule">intitule : </label>
-        <input
-          type="text"
-          name="intitule"
-          id="intitule"
-          value={this.state.creneau.intitule || ""}
-          onChange={this.handleInputChanged.bind(this)}
-          required
-        />
-      </div>
-      <div>
         <label for="date_heure">date : </label>
         <input
           type="datetime-local"
@@ -62,12 +51,23 @@ export default class FormCreneau extends Component {
         />
       </div>
       <div>
-        <label for="duree">duree effective : </label>
+        <label for="duree">duree : </label>
         <input
           type="time"
           name="duree"
           id="duree"
           value={this.state.creneau.duree || ""}
+          onChange={this.handleInputChanged.bind(this)}
+          required
+        />
+      </div>
+      <div>
+        <label for="salle">salle : </label>
+        <input
+          type="text"
+          name="salle"
+          id="salle"
+          value={this.state.creneau.salle || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />
@@ -90,17 +90,6 @@ export default class FormCreneau extends Component {
             >{item.intitule}</option>
           )}
         </select>
-      </div>
-      <div>
-        <label for="salle">salle : </label>
-        <input
-          type="text"
-          name="salle"
-          id="salle"
-          value={this.state.creneau.salle || ""}
-          onChange={this.handleInputChanged.bind(this)}
-          required
-        />
       </div>
       <div>
         <input type="submit" value={ this.state.submitValue }/>
