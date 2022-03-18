@@ -1,4 +1,5 @@
 import headers from './headers.service'
+import Auth from './auth.service'
 
 const axios = require('axios')
 
@@ -10,8 +11,8 @@ class SeanceService {
     return axios.get(API_URL_SEANCES, headers())
   }
   /* Séances intervenants */
-  getSeancesIntervenants(id) {
-    return axios.get(API_URL_SEANCE_INTERVENANTS + "?idIntervenant=" + id, headers())
+  getSeancesIntervenants() {
+    return axios.get(API_URL_SEANCE_INTERVENANTS + "?idIntervenant=" + Auth.getCurrentId(), headers())
   }
   updateSeance(user) {
     return axios.post(API_URL_SEANCE_INTERVENANTS, user, headers())

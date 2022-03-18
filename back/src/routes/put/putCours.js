@@ -1,5 +1,6 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
+const jwtManager = require('../../jwt/jwtManager');
 
 router.put('/cours', function (req, res) {
 

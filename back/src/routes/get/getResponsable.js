@@ -1,7 +1,16 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
+const jwtManager = require('../../jwt/jwtManager');
 
 router.get('/responsables', (req, res) => {
+
+    if (!jwtManager.checkPermission(2, jwtManager.getJtw(req.headers['x-access-token']))) {
+        res.status(403).json({
+            error: true,
+            message: "Vous n'avez pas accès à cette ressource"
+        });
+        return;
+    }
 
     const SQLRequest = "SELECT * FROM RESPONSABLE";
     connexion.query(SQLRequest, function (err, data) {

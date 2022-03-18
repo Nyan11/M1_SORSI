@@ -76,7 +76,7 @@ export default class Cours extends Component {
     })
   }
   render() {
-    if (this.state.creneaux === null) {
+    if (!this.state.creneaux || this.state.creneaux === null) {
       return (<div>
         <h3>Liste des séances</h3>
         Loading ...

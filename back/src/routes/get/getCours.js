@@ -1,19 +1,17 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
+const jwtManager = require('../../jwt/jwtManager');
 
 router.get('/cours', (req, res) => {
-/*
-    const SQLRequest =
-      "SELECT " +
-      "COURS.id, COURS.intitule, " +
-      "FILIERE_LANGUE.idFiliereLangue, FILIERE_LANGUE.codeFiliereLangue, " +
-      "INTERVENANT.nomUsuel, INTERVENANT.prenom, PARTICIPE_A.idIntervenant " +
-      "FROM COURS, CONCERNE, FILIERE_LANGUE, PARTICIPE_A, INTERVENANT " +
-      "WHERE COURS.id = CONCERNE.idCours " +
-      "AND FILIERE_LANGUE.idFiliereLangue = CONCERNE.idFiliereLangue " +
-      "AND INTERVENANT.id = PARTICIPE_A.idIntervenant " +
-      "AND COURS.id = PARTICIPE_A.idCours ";
-*/
+
+    if (!jwtManager.checkPermission(3, jwtManager.getJtw(req.headers['x-access-token']))) {
+        res.status(403).json({
+            error: true,
+            message: "Vous n'avez pas accès à cette ressource"
+        });
+        return;
+    }
+
     const SQLRequest =
       "SELECT " +
       "COURS.idCours, COURS.intitule, " +

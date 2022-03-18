@@ -1,7 +1,16 @@
 const connexion = require("../../db/sql");
 const router = require('express').Router();
+const jwtManager = require('../../jwt/jwtManager');
 
 router.post('/seances', function (req, res) {
+
+    if (!jwtManager.checkPermission(3, jwtManager.getJtw(req.headers['x-access-token']))) {
+        res.status(403).json({
+            error: true,
+            message: "Vous n'avez pas accès à cette ressource"
+        });
+        return;
+    }
 
     const { idSeance,  estEffectue, dureeEffective, valide, commentaire} = req.body;
 

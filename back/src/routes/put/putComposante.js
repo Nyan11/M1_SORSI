@@ -4,6 +4,14 @@ const jwtManager = require('../../jwt/jwtManager');
 
 router.put('/composantes', function (req, res) {
 
+    if (!jwtManager.checkPermission(1, jwtManager.getJtw(req.headers['x-access-token']))) {
+        res.status(403).json({
+            error: true,
+            message: "Vous n'avez pas accès à cette ressource"
+        });
+        return;
+    }
+
     const nomComposante = req.body.nomComposante;
     const idResponsable = req.body.idResponsable;
 
