@@ -1,0 +1,32 @@
+M1 info - Projet SOR-SI
+Détails pour l'application badgeuse, dédiée au pointage par les gestionnaires des cours donnés par des intervenants.
+
+L'application permet de se connecter avec votre login fourni par l'UBO.
+
+Vous êtes GESTIONNAIRE
+======================
+En tant que gestionnaire de l'UBO vous avez accès à la gestion des différents modules :
+* Gestion des composantes
+  - Ajouter et supprimer une nouvelle composante et un responsable de composante au système. Attention, impossible de supprimer une composante qui a été liée à une filière langue
+  - Ajouter et supprimer une nouvelle filière langue. Attention, impossible de supprimer une filière qui a été liée à un cours
+  - Ajouter et supprimer un cours, le lier à un ou plusieurs intervenants et filières langue
+
+* Gestion des intervenants
+  - Obtenir la liste des intervenants, en ajouter au système, en suppprimer
+  - Ajouter et supprimer des créneaux liés aux cours (ceux-ci seront au futur directement récupéréés depuis l'ADE)
+  - Obtenir la liste des séances de formation à valider. Il est possible de répondre à l'éventuel commentaire d'un intervenant
+
+
+Vous êtes INTERVENANT
+=====================
+En tant qu'intervenant, vous pouvez :
+* Visualiser vos créneaux
+  - Obtenir la liste de vos cours et de vos créneaux. Vous ne pouvez pas en ajouter ou supprimer, ce droit étant réservé aux gestionnaires de l'UBO
+
+* Pointer vos séances
+  - Renseigner les informations de la séance effectuée sur un créneau :
+    durée effective de la séance, commentaire éventuel à faire remonter sur la salle ou le matériel
+    
+Compte ADMINISTRATEUR
+=====================
+Vous rêvez de puissance ? Ce compt permet de gérer les comptes gestionnaire !
