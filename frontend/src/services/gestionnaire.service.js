@@ -19,7 +19,7 @@ class GestionnaireService {
     return axios.put(API_URL_COMPOSANTE, item, headers())
   }
   deleteComposante(item) {
-    return axios.delete(API_URL_COMPOSANTE, {data: item}, headers())
+    return axios.delete(API_URL_COMPOSANTE, {data: item, ...headers()})
   }
   /* Cours */
   getCours() {
@@ -37,7 +37,7 @@ class GestionnaireService {
     })
   }
   deleteCours(cours) {
-    return axios.delete(API_URL_COURS, {data: cours}, headers())
+    return axios.delete(API_URL_COURS, {data: cours, ...headers()})
   }
   /* Filiere */
   getFilieres() {
@@ -50,7 +50,7 @@ class GestionnaireService {
     return axios.put(API_URL_FILIERE, item, headers())
   }
   deleteFiliere(item) {
-    return axios.delete(API_URL_FILIERE, {data: item}, headers())
+    return axios.delete(API_URL_FILIERE, {data: item, ...headers()})
   }
 }
 export default new GestionnaireService();

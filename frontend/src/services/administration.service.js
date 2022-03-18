@@ -17,7 +17,7 @@ class AdministrationService {
     return axios.put(API_URL_GESTIONNAIRES, user, headers())
   }
   deleteGestionnaire(user) {
-    return axios.delete(API_URL_GESTIONNAIRES, {data: user}, headers())
+    return axios.delete(API_URL_GESTIONNAIRES, {data: user, ...headers()})
   }
   /* Responsable */
   getResponsables() {
@@ -30,7 +30,7 @@ class AdministrationService {
     return axios.put(API_URL_RESPONSABLES, user, headers())
   }
   deleteResponsable(user) {
-    return axios.delete(API_URL_RESPONSABLES, {data: user}, headers())
+    return axios.delete(API_URL_RESPONSABLES, {data: user, ...headers()})
   }
   /* Intervenant */
   getIntervenants() {
@@ -43,7 +43,7 @@ class AdministrationService {
     return axios.put(API_URL_INTERVENANTS, user, headers())
   }
   deleteIntervenant(user) {
-    return axios.delete(API_URL_INTERVENANTS, {data: user}, headers())
+    return axios.delete(API_URL_INTERVENANTS, {data: user, ...headers()})
   }
 }
 export default new AdministrationService();

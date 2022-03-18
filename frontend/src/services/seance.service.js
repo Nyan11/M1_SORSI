@@ -21,7 +21,7 @@ class SeanceService {
     return axios.put(API_URL_SEANCE_INTERVENANTS, user, headers())
   }
   deleteSeance(user) {
-    return axios.delete(API_URL_SEANCE_INTERVENANTS, {data: user}, headers())
+    return axios.delete(API_URL_SEANCE_INTERVENANTS, {data: user, ...headers()})
   }
 }
 export default new SeanceService();

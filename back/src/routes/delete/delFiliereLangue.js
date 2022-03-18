@@ -20,7 +20,6 @@ router.delete('/filiereslangue', (req, res) => {
         });
     }
 
-
     //Vérification que la filière ne sois pas lier à un cours
     const SQLRequest = "SELECT * FROM FILIERE_LANGUE INNER JOIN CONCERNE ON FILIERE_LANGUE.idFiliereLangue = CONCERNE.idFiliereLangue WHERE FILIERE_LANGUE.idFiliereLangue = ?";
     connexion.query(SQLRequest,[id_filiere],async (error, result) => {
