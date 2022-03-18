@@ -41,7 +41,7 @@ class NavBarResponsable extends Component {
             <Link
               class={this.state.selected === "" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkHome.bind(this)}
-              to="/gestionnaire"
+              to="/responsable"
             >Home
             </Link>
           </li>
@@ -49,7 +49,7 @@ class NavBarResponsable extends Component {
             <Link
               class={this.state.selected === "/login" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkLogin.bind(this)}
-              to="/gestionnaire/login"
+              to="/responsable/login"
             >Login
             </Link>
           </li>
@@ -57,7 +57,7 @@ class NavBarResponsable extends Component {
             <Link
               class={this.state.selected === "/composante" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkComposante.bind(this)}
-              to="/gestionnaire/composante"
+              to="/responsable/composante"
             >Composante
             </Link>
           </li>
@@ -65,7 +65,7 @@ class NavBarResponsable extends Component {
             <Link
               class={this.state.selected === "/filiere" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkFiliere.bind(this)}
-              to="/gestionnaire/filiere"
+              to="/responsable/filiere"
             >Filiere
             </Link>
           </li>
@@ -73,7 +73,7 @@ class NavBarResponsable extends Component {
             <Link
               class={this.state.selected === "/cours" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkCours.bind(this)}
-              to="/gestionnaire/cours"
+              to="/responsable/cours"
             >Cours
             </Link>
           </li>
@@ -81,7 +81,7 @@ class NavBarResponsable extends Component {
             <Link
               class={this.state.selected === "/creneau" ? "navbar-link-selected" : "navbar-link"}
               onClick={this.changeLinkCreneau.bind(this)}
-              to="/gestionnaire/creneau"
+              to="/responsable/creneau"
             >Creneau
             </Link>
           </li>
@@ -108,7 +108,7 @@ function Home() {
 
 export default class HomeResponsable extends Component {
   render() {
-    if (Auth.isLogAsGestionnaire()) {
+    if (Auth.isLogAsResposnable()) {
       return <div className="App">
         <Routes>
           <Route path="/" element={<NavBarResponsable />}>

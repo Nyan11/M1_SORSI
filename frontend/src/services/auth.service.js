@@ -41,5 +41,8 @@ class AuthService {
   isLogAsIntervenant() {
     return localStorage.getItem("isLog") && localStorage.getItem("category") === "intervenant"
   }
+  isLogAsResposnable() {
+    return localStorage.getItem("isLog") && localStorage.getItem("category") === "responsable"
+  }
 }
 export default new AuthService();
