@@ -4,7 +4,6 @@ import Administration from './administration/HomeAdministration'
 import Gestionnaire from './gestionnaire/HomeGestionnaire'
 import Responsable from './responsable/HomeResponsable'
 import Intervenant from './intervenant/HomeIntervenant'
-import Login from './other/Login'
 import NavBar from './other/NavBar'
 import NoMatch from './other/NoMatch'
 import Auth from './services/auth.service'
@@ -17,10 +16,6 @@ function App() {
           <Route
             index
             element={<Home />}
-          />
-          <Route
-            path="login"
-            element={<Login category="" />}
           />
           <Route
             path="administration/*"
