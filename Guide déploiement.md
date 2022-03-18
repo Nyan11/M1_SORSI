@@ -1,3 +1,5 @@
+#M1 info - Projet SOR-SI
+
 Le projet est divisé en 2 parties, le FRONT (partie visuelle) et le BACK (l'API Rest en node.js).
 
 Récuperer le dossier du projet :
