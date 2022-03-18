@@ -24,4 +24,6 @@ node src/server.js &
 
 Attention : n'oubliez pas de modifier côté back dans le fichier /back/src/db/dbConfig.js de modifier les informations de connexion à la base de données.
 
+
 Vous pouvez également modifier si vous le souhaiter la clé de sécurité du JWT via le fichier /back/src/jwt/jwtConfig.js
+
