@@ -4,7 +4,7 @@ import Service from '../../services/seance.service'
 
 
 async function updateView() {
-  return Service.getSeances().then(data => data.data)
+  return Service.getCreneaux().then(data => data.data)
 }
 
 export default class Cours extends Component {

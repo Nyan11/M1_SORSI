@@ -2,7 +2,7 @@ const connexion = require("../../db/sql");
 const router = require('express').Router();
 const jwtManager = require('../../jwt/jwtManager');
 
-router.put('/cours', function (req, res) {
+router.put('/cours', jwtManager.verifyToken, function (req, res) {
 
     const { intitule } = req.body;
     console.log(intitule)

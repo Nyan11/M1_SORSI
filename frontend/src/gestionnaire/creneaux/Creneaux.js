@@ -2,19 +2,33 @@ import React, { Component } from 'react'
 import TableCreneaux from './TableCreneaux'
 import FormCreneau from './FormCreneau'
 import Service from '../../services/seance.service'
+import Gest from '../../services/gestionnaire.service'
 
+
+async function getCours() {
+  return Gest.getCours().then(data => {
+    return data.data.reduce((acc, cours) => {
+      if (acc.find(item => item.idCours === cours.idCours)) {
+        return acc
+      } else {
+        acc.push({idCours: cours.idCours, intitule: cours.intitule})
+        return acc
+      }
+    }, [])
+  })
+}
 
 async function modifier(itemNew, itemOld) {
-  Service.getSeance(itemNew).then(data => data.data)
+  Service.postCreneaux(itemNew).then(data => data.data)
 }
 async function supprimer(item) {
-  Service.getSeance(item).then(data => data.data)
+  Service.delCreneaux(item).then(data => data.data)
 }
 async function ajouter(item) {
-  Service.getSeance(item).then(data => data.data)
+  Service.putCreneaux(item).then(data => data.data)
 }
 async function updateView() {
-  return Service.getSeances().then(data => data.data)
+  return Service.getCreneaux().then(data => data.data)
 }
 
 export default class Cours extends Component {
@@ -29,22 +43,31 @@ export default class Cours extends Component {
       actionAjouter: ajouter,
       actionSupprimer: supprimer,
       actionModifier: modifier,
+      cours: null,
       selected: {},
     }
   }
   componentDidMount() {
-    this._asyncRequest = updateView().then(
+    this._asyncRequestCreneaux = updateView().then(
       liste => {
-        this._asyncRequest = null
+        this._asyncRequestCreneaux = null
         this.setState((state) => {
           return {...state, creneaux: liste}
+        })
+      }
+    )
+    this._asyncRequestCours = getCours().then(
+      liste => {
+        this._asyncRequestCours = null
+        this.setState((state) => {
+          return {...state, cours: liste}
         })
       }
     )
   }
   triggerAjouter(cours) {
     this.state.actionAjouter(cours)
-    window.location.reload(false)
+    //window.location.reload(false)
   }
   triggerShowAjouter() {
     this.setState((state) => {
@@ -58,7 +81,7 @@ export default class Cours extends Component {
   }
   triggerModifier(creneau) {
     this.state.actionModifier(creneau, this.state.selected)
-    window.location.reload(false)
+    //window.location.reload(false)
   }
   triggerShowModifier(creneau) {
     this.setState((state) => {
@@ -72,7 +95,7 @@ export default class Cours extends Component {
   }
   triggerSupprimer() {
     this.state.actionSupprimer(this.state.selected)
-    window.location.reload(false)
+    //window.location.reload(false)
   }
   triggerShowSupprimer(creneau) {
     this.setState((state) => {
@@ -95,7 +118,7 @@ export default class Cours extends Component {
     })
   }
   render() {
-    if (this.state.creneaux === null) {
+    if (this.state.creneaux === null || this.state.cours === null) {
       return (<div>
         <h3>Liste des creneaux</h3>
         Loading ...
@@ -114,7 +137,7 @@ export default class Cours extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Ajouter un creneau</h3>
-              <FormCreneau trigger={  this.triggerAjouter.bind(this) }/>
+              <FormCreneau trigger={  this.triggerAjouter.bind(this) } cours={this.state.cours} />
               <button class="button-cancel" onClick={ this.triggerHideAjouter.bind(this) }>Annuler</button>
             </div>
           </div>
@@ -149,7 +172,7 @@ export default class Cours extends Component {
           <div class="dialog-overlay">
             <div class="dialog">
               <h3>Modification de { this.state.selected.intitule }</h3>
-              <FormCreneau creneau={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
+              <FormCreneau cours={this.state.cours} creneau={ this.state.selected } trigger={  this.triggerModifier.bind(this) } submitValue="modifier"/>
               <button class="button-cancel" onClick={ this.triggerHideModifier.bind(this) }>Annuler</button>
             </div>
           </div>

@@ -2,7 +2,7 @@ const connexion = require("../../db/sql");
 const router = require('express').Router();
 const jwtManager = require('../../jwt/jwtManager');
 
-router.get('/gestionnaires', (req, res) => {
+router.get('/gestionnaires', jwtManager.verifyToken, (req, res) => {
 
     if (!jwtManager.checkPermission(1, jwtManager.getJtw(req.headers['x-access-token']))) {
         res.status(403).json({

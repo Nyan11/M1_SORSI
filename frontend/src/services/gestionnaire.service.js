@@ -33,7 +33,8 @@ class GestionnaireService {
   createCours(cours, concerne, participe) {
     axios.put(API_URL_COURS, { intitule: cours }, headers()).then(res => {
       axios.post(API_URL_CONCERNE, {idCours: res.data.idCours, filieres: concerne}, headers())
-      return axios.post(API_URL_PARTICIPE, {idCours: res.data.idCours, intervenants: participe}, headers())
+      axios.post(API_URL_PARTICIPE, {idCours: res.data.idCours, intervenants: participe}, headers())
+      return res
     })
   }
   deleteCours(cours) {

@@ -4,7 +4,7 @@ const jwtManager = require('../../jwt/jwtManager');
 
 const router = require('express').Router();
 
-router.delete('/intervenants', (req, res) => {
+router.delete('/intervenants', jwtManager.verifyToken, (req, res) => {
 
     if (!jwtManager.checkPermission(1, jwtManager.getJtw(req.headers['x-access-token']))) {
         res.status(403).json({

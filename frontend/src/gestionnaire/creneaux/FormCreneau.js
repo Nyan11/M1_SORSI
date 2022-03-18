@@ -5,6 +5,7 @@ export default class FormCreneau extends Component {
     super(props)
     this.state = {
       creneau: {},
+      cours: props.cours,
       submitValue: "Ajouter",
       trigger: () => {}
     }
@@ -29,8 +30,9 @@ export default class FormCreneau extends Component {
   }
 
   handleSubmitClicked(event) {
-    var item = this.state.cours
+    var item = this.state.creneau
     event.preventDefault()
+    console.log(item)
     this.state.trigger(item)
   }
 
@@ -51,7 +53,7 @@ export default class FormCreneau extends Component {
       <div>
         <label for="date_heure">date : </label>
         <input
-          type="text"
+          type="datetime-local"
           name="date_heure"
           id="date_heure"
           value={this.state.creneau.date_heure || ""}
@@ -60,12 +62,12 @@ export default class FormCreneau extends Component {
         />
       </div>
       <div>
-        <label for="dureeEffective">duree effective : </label>
+        <label for="duree">duree effective : </label>
         <input
-          type="text"
-          name="dureeEffective"
-          id="dureeEffective"
-          value={this.state.creneau.dureeEffective || ""}
+          type="time"
+          name="duree"
+          id="duree"
+          value={this.state.creneau.duree || ""}
           onChange={this.handleInputChanged.bind(this)}
           required
         />
@@ -76,6 +78,17 @@ export default class FormCreneau extends Component {
           <option value="CM">CM</option>
           <option value="TD">TD</option>
           <option value="TP">TP</option>
+        </select>
+      </div>
+      <div>
+        <label for="idCours">cours : </label>
+        <select id="idCours" name="idCours" value={this.state.creneau.idCours} onChange={this.handleInputChanged.bind(this)}>
+          {this.state.cours.map((item, index) =>
+            <option
+              key={ index }
+              value={ item.idCours }
+            >{item.intitule}</option>
+          )}
         </select>
       </div>
       <div>

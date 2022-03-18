@@ -194,7 +194,7 @@ form > div {
   display: flex;
   justify-content: center;
 }
-input[type=text], input[type=email], input[type=password], select, textarea {
+input[type=text], input[type=email], input[type=password], input[type="time"], input[type="datetime-local"], select, textarea {
   flex-grow: 1;
   padding: 12px;
   border: 1px solid #ccc;

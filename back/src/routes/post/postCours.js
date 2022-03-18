@@ -2,7 +2,7 @@ const connexion = require("../../db/sql");
 const router = require('express').Router();
 const jwtManager = require('../../jwt/jwtManager');
 
-router.post('/cours', function (req, res) {
+router.post('/cours', jwtManager.verifyToken, function (req, res) {
 
     if (!jwtManager.checkPermission(2, jwtManager.getJtw(req.headers['x-access-token']))) {
         res.status(403).json({
@@ -12,11 +12,11 @@ router.post('/cours', function (req, res) {
         return;
     }
 
-    const { id, intitule } = req.body;
+    const { idCours, intitule } = req.body;
 
     let sql = "UPDATE COURS SET intitule=? WHERE idCours = ?";
 
-    connexion.query(sql, [intitule, id], function (err, data, fields) {
+    connexion.query(sql, [intitule, idCours], function (err, data, fields) {
 
         if (err) {
           res.status(500).json({err: err});
